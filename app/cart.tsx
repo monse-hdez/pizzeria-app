@@ -5,10 +5,10 @@ import {
   Image,
   TouchableOpacity,
   StyleSheet,
-  ScrollView
+  ScrollView,
+  useWindowDimensions
 } from "react-native";
 
-// 👇 definimos el tipo
 type CartItem = {
   id: number;
   name: string;
@@ -18,111 +18,116 @@ type CartItem = {
 };
 
 export default function Cart() {
+  const { width } = useWindowDimensions();
+  const isWeb = width > 600;
+
   const [items, setItems] = useState<CartItem[]>([
     {
       id: 1,
       name: "Pizza Pepperoni",
       price: 150,
-      img: require("../assets/images/Ventana Carrito/pizzza.png"),
+      img: require("../assets/images/carrito/pizzza.png"),
       qty: 1,
     },
     {
       id: 2,
       name: "Refresco Cola",
       price: 50,
-      img: require("../assets/images/Ventana Carrito/refresco.png"),
+      img: require("../assets/images/carrito/refresco.png"),
       qty: 1,
     },
   ]);
 
-  // ➕ aumentar
-  const increase = (itemId: number) => {
-    setItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === itemId
-          ? { ...item, qty: item.qty + 1 }
-          : item
-      )
-    );
+  const increase = (id: number) => {
+    setItems(items.map(item =>
+      item.id === id ? { ...item, qty: item.qty + 1 } : item
+    ));
   };
 
-  // ➖ disminuir
-  const decrease = (itemId: number) => {
-    setItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === itemId && item.qty > 1
-          ? { ...item, qty: item.qty - 1 }
-          : item
-      )
-    );
+  const decrease = (id: number) => {
+    setItems(items.map(item =>
+      item.id === id && item.qty > 1
+        ? { ...item, qty: item.qty - 1 }
+        : item
+    ));
   };
 
-  const total = items.reduce(
-    (acc, item) => acc + item.price * item.qty,
-    0
-  );
+  const total = items.reduce((acc, item) => acc + item.price * item.qty, 0);
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.header}>🛒 Carrito de Compras</Text>
+    <ScrollView
+      contentContainerStyle={[
+        styles.screen,
+        { flexGrow: 1 },
+        isWeb && { justifyContent: "center", alignItems: "center" }
+      ]}
+    >
+      <View style={[styles.container, isWeb && { width: 400 }]}>
 
-      {items.map((item) => (
-        <View key={item.id} style={styles.card}>
-          <Image source={item.img} style={styles.img} />
+        <Text style={styles.header}>🛒 Carrito de Compras</Text>
 
-          <View style={styles.info}>
-            <Text style={styles.name}>{item.name}</Text>
-            <Text>${item.price}.00</Text>
+        {items.map((item) => (
+          <View key={item.id} style={styles.card}>
+            <Image source={item.img} style={styles.img} />
 
-            <View style={styles.controls}>
-              <TouchableOpacity
-                onPress={() => decrease(item.id)}
-                style={styles.btn}
-              >
-                <Text style={styles.btnText}>−</Text>
-              </TouchableOpacity>
+            <View style={styles.info}>
+              <Text style={styles.name}>{item.name}</Text>
+              <Text>${item.price}.00</Text>
 
-              <Text style={styles.qty}>{item.qty}</Text>
+              <View style={styles.controls}>
+                <TouchableOpacity onPress={() => decrease(item.id)} style={styles.btn}>
+                  <Text style={styles.btnText}>−</Text>
+                </TouchableOpacity>
 
-              <TouchableOpacity
-                onPress={() => increase(item.id)}
-                style={styles.btn}
-              >
-                <Text style={styles.btnText}>+</Text>
-              </TouchableOpacity>
+                <Text style={styles.qty}>{item.qty}</Text>
+
+                <TouchableOpacity onPress={() => increase(item.id)} style={styles.btn}>
+                  <Text style={styles.btnText}>+</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
+        ))}
+
+        <View>
+          <View style={styles.total}>
+            <Text style={styles.totalText}>Total: ${total}.00</Text>
+          </View>
+
+          <TouchableOpacity style={styles.checkoutBtn}>
+            <Text style={styles.checkoutText}>Finalizar Compra</Text>
+          </TouchableOpacity>
+
+          <Image
+            source={require("../assets/images/carrito/pizzabajo.png")}
+            style={styles.bottomImage}
+          />
         </View>
-      ))}
 
-      <View style={styles.total}>
-        <Text style={styles.totalText}>Total: ${total}.00</Text>
       </View>
-
-      <TouchableOpacity style={styles.checkoutBtn}>
-        <Text style={styles.checkoutText}>
-          Finalizar Compra
-        </Text>
-      </TouchableOpacity>
-
-      <Image
-        source={require("../assets/images/Ventana Carrito/pizzabajo.png")}
-        style={styles.bottomImage}
-      />
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  screen: {
+    flexGrow: 1,
+    backgroundColor: "#d6c39a",
     padding: 15,
+  },
+
+  container: {
+    width: "100%",
     backgroundColor: "#f4e1c1",
+    borderRadius: 20,
+    padding: 15,
+    flex: 1,
+    justifyContent: "space-between",
   },
 
   header: {
     textAlign: "center",
-    fontSize: 20,
+    fontSize: 22,
     marginBottom: 15,
     fontWeight: "bold",
   },
@@ -137,8 +142,8 @@ const styles = StyleSheet.create({
   },
 
   img: {
-    width: 60,
-    height: 60,
+    width: 65,
+    height: 65,
     marginRight: 10,
   },
 
@@ -148,6 +153,7 @@ const styles = StyleSheet.create({
 
   name: {
     fontWeight: "bold",
+    fontSize: 16,
   },
 
   controls: {
@@ -159,7 +165,7 @@ const styles = StyleSheet.create({
   btn: {
     backgroundColor: "#c0392b",
     borderRadius: 8,
-    paddingHorizontal: 10,
+    paddingHorizontal: 12,
     paddingVertical: 5,
   },
 
@@ -175,7 +181,7 @@ const styles = StyleSheet.create({
 
   total: {
     backgroundColor: "#c0392b",
-    padding: 10,
+    padding: 12,
     borderRadius: 10,
     marginTop: 10,
     alignItems: "center",
@@ -184,11 +190,12 @@ const styles = StyleSheet.create({
   totalText: {
     color: "white",
     fontWeight: "bold",
+    fontSize: 16,
   },
 
   checkoutBtn: {
     backgroundColor: "#2ecc71",
-    padding: 12,
+    padding: 14,
     borderRadius: 12,
     marginTop: 10,
     alignItems: "center",
@@ -202,8 +209,8 @@ const styles = StyleSheet.create({
 
   bottomImage: {
     width: "100%",
-    height: 220,
+    height: 180,
     marginTop: 15,
-    borderRadius: 20,
+    borderRadius: 15,
   },
 });
