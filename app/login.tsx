@@ -33,7 +33,7 @@ export default function LoginScreen() {
 
     return (
         <ImageBackground
-            source={require("../assets/login/pizza-bg.jpg")}
+            source={require("../assets/loginImg/pizza-bg.jpg")}
             style={styles.container}
             resizeMode="cover"
         >
@@ -54,7 +54,7 @@ export default function LoginScreen() {
                     ]}
                 >
                     <Text style={styles.title}>Pizzería</Text>
-                    <Text style={styles.title}>" Bella"</Text>
+                    <Text style={styles.title}>" Bella "</Text>
 
                     <View style={styles.card}>
                         <TextInput

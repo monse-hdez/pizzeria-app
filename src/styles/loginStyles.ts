@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 
     title: {
         color: "#fff",
-        fontSize: 40,
+        fontSize: 45,
         textAlign: "center",
         marginBottom: 20,
         fontWeight: "bold",
