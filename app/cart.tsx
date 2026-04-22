@@ -23,14 +23,14 @@ export default function Cart() {
       id: 1,
       name: "Pizza Pepperoni",
       price: 150,
-      img: require("../assets/(Ventana Carrito)/pizzza.png"),
+      img: require("../assets/images/Ventana Carrito/pizzza.png"),
       qty: 1,
     },
     {
       id: 2,
       name: "Refresco Cola",
       price: 50,
-      img: require("../assets/(Ventana Carrito)/refresco.png"),
+      img: require("../assets/images/Ventana Carrito/refresco.png"),
       qty: 1,
     },
   ]);
@@ -106,7 +106,7 @@ export default function Cart() {
       </TouchableOpacity>
 
       <Image
-        source={require("../assets/(Ventana Carrito)/pizzabajo.png")}
+        source={require("../assets/images/Ventana Carrito/pizzabajo.png")}
         style={styles.bottomImage}
       />
     </ScrollView>

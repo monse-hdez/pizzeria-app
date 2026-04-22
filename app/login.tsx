@@ -1,3 +1,4 @@
+import { useRouter } from "expo-router";
 import React, { useEffect, useRef } from "react";
 import {
     Animated,
@@ -9,12 +10,12 @@ import {
     TouchableOpacity,
     View
 } from "react-native";
-
 import styles from "../src/styles/loginStyles";
 
 export default function LoginScreen() {
     const fadeAnim = useRef(new Animated.Value(0)).current;
     const translateY = useRef(new Animated.Value(40)).current;
+    const router = useRouter();
 
     useEffect(() => {
         Animated.parallel([
@@ -73,14 +74,18 @@ export default function LoginScreen() {
                         <TouchableOpacity
                             style={styles.button}
                             activeOpacity={0.7}
+                            onPress={() => router.push("/home")}
                         >
                             <Text style={styles.buttonText}>Ingresar</Text>
                         </TouchableOpacity>
 
                         <Text style={styles.link}>¿Olvidaste tu contraseña?</Text>
-                        <Text style={styles.link}>
-                            ¿No tienes cuenta? Regístrate
-                        </Text>
+                        <TouchableOpacity onPress={() => router.push("/register")}>
+                            <Text style={styles.link}> ¿No tienes cuenta? <Text style={styles.registerLink}>
+                                Regístrate
+                            </Text></Text>
+
+                        </TouchableOpacity>
                     </View>
                 </Animated.View>
             </KeyboardAvoidingView>
