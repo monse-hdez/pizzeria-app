@@ -3,10 +3,10 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-    },
-
-    scroll: {
-        flexGrow: 1,
+        width: "100%",
+        height: "100%",
+        justifyContent: "center",
+        alignItems: "center",
     },
 
     content: {
@@ -22,25 +22,28 @@ const styles = StyleSheet.create({
 
     title: {
         color: "#fff",
-        fontSize: 32,
+        fontSize: 40,
         textAlign: "center",
         marginBottom: 20,
         fontWeight: "bold",
+        fontStyle: "italic",
     },
 
     card: {
         backgroundColor: "#fff",
         borderRadius: 15,
         padding: 20,
-        width: "100%",
+
+        width: "85%",
         maxWidth: 400,
         alignSelf: "center",
 
-      
+        minWidth: 280,
+
         elevation: 8,
         shadowColor: "#000",
         shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.3,
+        shadowOpacity: 0.2,
         shadowRadius: 6,
     },
 

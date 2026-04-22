@@ -4,11 +4,10 @@ import {
     ImageBackground,
     KeyboardAvoidingView,
     Platform,
-    ScrollView,
     Text,
     TextInput,
     TouchableOpacity,
-    View,
+    View
 } from "react-native";
 
 import styles from "../src/styles/loginStyles";
@@ -44,46 +43,46 @@ export default function LoginScreen() {
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
                 style={styles.container}
             >
-                <ScrollView contentContainerStyle={styles.scroll}>
-                    <Animated.View
-                        style={[
-                            styles.content,
-                            {
-                                opacity: fadeAnim,
-                                transform: [{ translateY }],
-                            },
-                        ]}
-                    >
-                        <Text style={styles.title}>Pizzería Bella</Text>
 
-                        <View style={styles.card}>
-                            <TextInput
-                                placeholder="Correo electrónico"
-                                style={styles.input}
-                                placeholderTextColor="#999"
-                            />
+                <Animated.View
+                    style={[
+                        styles.content,
+                        {
+                            opacity: fadeAnim,
+                            transform: [{ translateY }],
+                        },
+                    ]}
+                >
+                    <Text style={styles.title}>Pizzería</Text>
+                    <Text style={styles.title}>" Bella"</Text>
 
-                            <TextInput
-                                placeholder="Contraseña"
-                                secureTextEntry
-                                style={styles.input}
-                                placeholderTextColor="#999"
-                            />
+                    <View style={styles.card}>
+                        <TextInput
+                            placeholder="Correo electrónico"
+                            style={styles.input}
+                            placeholderTextColor="#999"
+                        />
 
-                            <TouchableOpacity
-                                style={styles.button}
-                                activeOpacity={0.7}
-                            >
-                                <Text style={styles.buttonText}>Ingresar</Text>
-                            </TouchableOpacity>
+                        <TextInput
+                            placeholder="Contraseña"
+                            secureTextEntry
+                            style={styles.input}
+                            placeholderTextColor="#999"
+                        />
 
-                            <Text style={styles.link}>¿Olvidaste tu contraseña?</Text>
-                            <Text style={styles.link}>
-                                ¿No tienes cuenta? Regístrate
-                            </Text>
-                        </View>
-                    </Animated.View>
-                </ScrollView>
+                        <TouchableOpacity
+                            style={styles.button}
+                            activeOpacity={0.7}
+                        >
+                            <Text style={styles.buttonText}>Ingresar</Text>
+                        </TouchableOpacity>
+
+                        <Text style={styles.link}>¿Olvidaste tu contraseña?</Text>
+                        <Text style={styles.link}>
+                            ¿No tienes cuenta? Regístrate
+                        </Text>
+                    </View>
+                </Animated.View>
             </KeyboardAvoidingView>
         </ImageBackground>
     );
