@@ -8,16 +8,15 @@ import {
   StyleSheet,
 } from "react-native";
 
-
 export default function Customize() {
   const [seleccionados, setSeleccionados] = useState<string[]>([]);
 
   const ingredientes = [
-    { nombre: "Queso", img: require("../assets/images/cheese.png")},
-    { nombre: "Pepperoni", img: require("../assets/images/pepperoni.png")},
-    { nombre: "Jalapeños", img: require("../assets/images/chilli.png") },
-    { nombre: "Piña", img: require("../assets/images/pina.png")},
-    { nombre: "Philadelphia", img: require("../assets/images/philadelphia.png") },
+    { nombre: "Queso", img: require("../assets/images/ingredientes/cheese.png")},
+    { nombre: "Pepperoni", img: require("../assets/images/ingredientes/pepperoni.png")},
+    { nombre: "Jalapeños", img: require("../assets/images/ingredientes/chilli.png") },
+    { nombre: "Piña", img: require("../assets/images/ingredientes/pina.png")},
+    { nombre: "Philadelphia", img: require("../assets/images/ingredientes/philadelphia.png") },
   ];
 
   const toggleIngrediente = (item: string) => {
@@ -35,7 +34,7 @@ export default function Customize() {
 
       {/* Imagen principal */}
       <Image
-        source={require("../assets/images/pizza.png")}
+        source={require("../assets/images/ingredientes/pizza.png")}
         style={styles.pizza}
         resizeMode="contain"
       />
