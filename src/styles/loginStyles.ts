@@ -75,6 +75,11 @@ const styles = StyleSheet.create({
         textAlign: "center",
         color: "#555",
     },
+    registerLink: {
+        marginTop: 10,
+        textAlign: "center",
+        color: "#283289",
+    }
 });
 
 export default styles;

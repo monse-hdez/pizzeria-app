@@ -22,14 +22,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
 
-    // 🔥 CATEGORÍAS
-
     categoriasScroll: {
         flexDirection: 'row',
-        justifyContent: 'center', // ✅ centrado en celular
+        justifyContent: 'center', 
         alignItems: 'center',
         paddingBottom: 10,
-        flexGrow: 1, // 🔥 importante para centrar
+        flexGrow: 1, 
     },
 
     categoriasDesktop: {
@@ -75,7 +73,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
 
-    // 🔥 LISTA
+  
 
     lista: {
         paddingBottom: 20,
@@ -125,7 +123,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
 
-    // 🔥 BOTÓN
 
     boton: {
         backgroundColor: '#2ECC71',
