@@ -239,6 +239,11 @@ export default function Home() {
                                         styles.boton,
                                         isDesktop && styles.botonDesktop,
                                     ]}
+                                    onPress={() => {
+                                        if (item.id === 4) {
+                                            router.push('/customize');
+                                        }
+                                    }}
                                 >
                                     <Text
                                         style={[
