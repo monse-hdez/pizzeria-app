@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#1E1E1E',
-        paddingTop: 50,
+        paddingTop: 115,
         paddingHorizontal: 15,
         alignItems: 'center',
     },
@@ -15,19 +15,21 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        color: '#FFF',
+        color: "#fff",
+        fontSize: 45,
+        textAlign: "center",
         marginBottom: 20,
-        textAlign: 'center',
+        fontWeight: "bold",
+        fontStyle: "italic",
+        letterSpacing: 3,
     },
 
     categoriasScroll: {
         flexDirection: 'row',
-        justifyContent: 'center', 
+        justifyContent: 'center',
         alignItems: 'center',
         paddingBottom: 10,
-        flexGrow: 1, 
+        flexGrow: 1,
     },
 
     categoriasDesktop: {
@@ -73,7 +75,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
 
-  
+
 
     lista: {
         paddingBottom: 20,
@@ -144,6 +146,66 @@ const styles = StyleSheet.create({
 
     botonTextoDesktop: {
         fontSize: 16,
+    },
+    cartButton: {
+        position: 'absolute',
+        top: 60,
+        right: 20,
+        backgroundColor: '#E67E22',
+        padding: 15,
+        borderRadius: 50,
+        zIndex: 10,
+    },
+
+    cartPanel: {
+        position: 'absolute',
+        right: 0,
+        top: 0,
+        bottom: 0,
+        width: 280,
+        backgroundColor: '#2C2C2C',
+        padding: 20,
+        zIndex: 9,
+    },
+
+    cartTitle: {
+        color: '#FFF',
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 15,
+    },
+    menuButton: {
+        position: 'absolute',
+        top: 60,
+        left: 20,
+        backgroundColor: '#E67E22',
+        padding: 15,
+        borderRadius: 50,
+        zIndex: 10,
+    },
+
+    menuPanel: {
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        bottom: 0,
+        width: 260,
+        backgroundColor: '#2C2C2C',
+        padding: 20,
+        zIndex: 9,
+    },
+
+    menuTitle: {
+        color: '#FFF',
+        fontSize: 22,
+        fontWeight: 'bold',
+        marginBottom: 20,
+    },
+
+    menuItem: {
+        color: '#FFF',
+        fontSize: 16,
+        marginBottom: 15,
     },
 });
 

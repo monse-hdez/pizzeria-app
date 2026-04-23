@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         fontWeight: "bold",
         fontStyle: "italic",
+        letterSpacing: 3,
     },
 
     card: {
