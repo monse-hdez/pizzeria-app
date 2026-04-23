@@ -83,34 +83,52 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 25,
-    backgroundColor: '#fff',
+
+    // Aquí cambias el fondo
+    backgroundColor: '#f4e1c1',
   },
 
   title: {
-    fontSize: 28,
+    fontSize: 30,
     fontWeight: 'bold',
     marginBottom: 30,
     textAlign: 'center',
+    color: '#8B0000',
   },
 
   input: {
+    backgroundColor: '#fff',
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: '#d9b382',
     padding: 15,
-    borderRadius: 10,
+    borderRadius: 12,
     marginBottom: 15,
+    fontSize: 16,
   },
 
   button: {
     backgroundColor: '#E63946',
     padding: 18,
-    borderRadius: 10,
+    borderRadius: 12,
     alignItems: 'center',
+    marginTop: 10,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 3,
   },
 
   buttonText: {
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 16,
+  },
+
+  loginText: {
+    marginTop: 20,
+    textAlign: 'center',
+    color: '#8B0000',
+    fontWeight: 'bold',
+    fontSize: 15,
   },
 });
