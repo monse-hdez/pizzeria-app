@@ -79,7 +79,9 @@ export default function LoginScreen() {
                             <Text style={styles.buttonText}>Ingresar</Text>
                         </TouchableOpacity>
 
-                        <Text style={styles.link}>¿Olvidaste tu contraseña?</Text>
+                        <TouchableOpacity onPress={() => router.push("/forgot-password")}>
+                            <Text style={styles.registerLink}>¿Olvidaste tu contraseña?</Text>
+                        </TouchableOpacity>
                         <TouchableOpacity onPress={() => router.push("/register")}>
                             <Text style={styles.link}> ¿No tienes cuenta? <Text style={styles.registerLink}>
                                 Regístrate
