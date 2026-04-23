@@ -12,11 +12,26 @@ export default function Customize() {
   const [seleccionados, setSeleccionados] = useState<string[]>([]);
 
   const ingredientes = [
-    { nombre: "Queso", img: require("../assets/images/ingredientes/cheese.png")},
-    { nombre: "Pepperoni", img: require("../assets/images/ingredientes/pepperoni.png")},
-    { nombre: "Jalapeños", img: require("../assets/images/ingredientes/chilli.png") },
-    { nombre: "Piña", img: require("../assets/images/ingredientes/pina.png")},
-    { nombre: "Philadelphia", img: require("../assets/images/ingredientes/philadelphia.png") },
+    {
+      nombre: "Queso",
+      img: require("../assets/images/ingredientes/cheese.png"),
+    },
+    {
+      nombre: "Pepperoni",
+      img: require("../assets/images/ingredientes/pepperoni.png"),
+    },
+    {
+      nombre: "Jalapeños",
+      img: require("../assets/images/ingredientes/chilli.png"),
+    },
+    {
+      nombre: "Piña",
+      img: require("../assets/images/ingredientes/pina.png"),
+    },
+    {
+      nombre: "Philadelphia",
+      img: require("../assets/images/ingredientes/philadelphia.png"),
+    },
   ];
 
   const toggleIngrediente = (item: string) => {
@@ -30,16 +45,60 @@ export default function Customize() {
   return (
     <SafeAreaView style={styles.container}>
       {/* Título */}
-      <Text style={styles.title}>Arma tu Pizza</Text>
+      <Text style={styles.title}>Arma tu Pizza 🍕</Text>
 
-      {/* Imagen principal */}
-      <Image
-        source={require("../assets/images/ingredientes/pizza.png")}
-        style={styles.pizza}
-        resizeMode="contain"
-      />
+      {/* Contenedor de pizza con ingredientes encima */}
+      <View style={styles.pizzaContainer}>
+        {/* Pizza base */}
+        <Image
+          source={require("../assets/images/ingredientes/pizzas.png")}
+          style={styles.pizzaBase}
+          resizeMode="contain"
+        />
 
-      {/* Ingredientes */}
+        {/* Ingredientes encima de la pizza */}
+        {seleccionados.includes("Queso") && (
+          <Image
+            source={require("../assets/images/ingredientes/cheese.png")}
+            style={styles.overlay}
+            resizeMode="contain"
+          />
+        )}
+
+        {seleccionados.includes("Pepperoni") && (
+          <Image
+            source={require("../assets/images/ingredientes/pepperoni.png")}
+            style={styles.overlay}
+            resizeMode="contain"
+          />
+        )}
+
+        {seleccionados.includes("Jalapeños") && (
+          <Image
+            source={require("../assets/images/ingredientes/chilli.png")}
+            style={styles.overlay}
+            resizeMode="contain"
+          />
+        )}
+
+        {seleccionados.includes("Piña") && (
+          <Image
+            source={require("../assets/images/ingredientes/pina.png")}
+            style={styles.overlay}
+            resizeMode="contain"
+          />
+        )}
+
+        {seleccionados.includes("Philadelphia") && (
+          <Image
+            source={require("../assets/images/ingredientes/philadelphia.png")}
+            style={styles.overlay}
+            resizeMode="contain"
+          />
+        )}
+      </View>
+
+      {/* Ingredientes seleccionables */}
       <View style={styles.grid}>
         {ingredientes.map((item, index) => (
           <TouchableOpacity
@@ -83,12 +142,30 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontWeight: "bold",
     marginBottom: 15,
+    color: "#6B3E26",
   },
 
-  pizza: {
-    width: 220,
-    height: 220,
+  /* Contenedor de pizza */
+  pizzaContainer: {
+    width: 250,
+    height: 250,
+    position: "relative",
     marginBottom: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  pizzaBase: {
+    width: 250,
+    height: 250,
+    position: "absolute",
+  },
+
+  /* Ingredientes encima */
+  overlay: {
+    width: 250,
+    height: 250,
+    position: "absolute",
   },
 
   grid: {
@@ -115,6 +192,7 @@ const styles = StyleSheet.create({
   selectedCard: {
     borderWidth: 2,
     borderColor: "#c0392b",
+    backgroundColor: "#fff7f5",
   },
 
   icon: {
