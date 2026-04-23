@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import {
-  View,
-  Text,
   Image,
-  TouchableOpacity,
-  StyleSheet,
   ScrollView,
-  useWindowDimensions
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  useWindowDimensions,
+  View
 } from "react-native";
 
 type CartItem = {

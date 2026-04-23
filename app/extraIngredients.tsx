@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import {
-  SafeAreaView,
-  View,
-  Text,
   Image,
-  TouchableOpacity,
+  SafeAreaView,
   StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 
 export default function ExtraIngredients() {
