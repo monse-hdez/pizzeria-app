@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import {
-  SafeAreaView,
-  View,
-  Text,
   Image,
-  TouchableOpacity,
+  SafeAreaView,
   StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 
 export default function Customize() {
   const [seleccionados, setSeleccionados] = useState<string[]>([]);
 
   const ingredientes = [
-    { nombre: "Queso", img: require("../assets/images/ingredientes/cheese.png")},
-    { nombre: "Pepperoni", img: require("../assets/images/ingredientes/pepperoni.png")},
+    { nombre: "Queso", img: require("../assets/images/ingredientes/cheese.png") },
+    { nombre: "Pepperoni", img: require("../assets/images/ingredientes/pepperoni.png") },
     { nombre: "Jalapeños", img: require("../assets/images/ingredientes/chilli.png") },
-    { nombre: "Piña", img: require("../assets/images/ingredientes/pina.png")},
+    { nombre: "Piña", img: require("../assets/images/ingredientes/pina.png") },
     { nombre: "Philadelphia", img: require("../assets/images/ingredientes/philadelphia.png") },
   ];
 

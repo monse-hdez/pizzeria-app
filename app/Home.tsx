@@ -8,8 +8,8 @@ import {
     View,
     useWindowDimensions,
 } from 'react-native';
-import Cart from '../app/cart';
 import styles from '../src/styles/homeStyles';
+import Cart from './cart';
 
 const pizzas = [
     {
@@ -192,6 +192,7 @@ export default function Home() {
                         styles.lista,
                         isTablet && styles.listaDesktop,
                     ]}
+
                 >
                     {(categoria === 'pizzas' ? pizzas : bebidas).map((item) => (
                         <View

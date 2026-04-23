@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import {
-  View,
+  Alert,
+  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  Alert,
-  StyleSheet
+  View
 } from 'react-native';
 
+import { router } from 'expo-router';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../src/services/firebaseConfig';
-import { router } from 'expo-router';
 
 export default function RegisterScreen() {
   const [nombre, setNombre] = useState('');
