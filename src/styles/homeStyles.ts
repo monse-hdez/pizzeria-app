@@ -10,18 +10,19 @@ const styles = StyleSheet.create({
     },
 
     wrapper: {
+        flex:1,
         width: '100%',
         maxWidth: 1200,
     },
 
     title: {
         color: "#fff",
-        fontSize: 45,
+        fontSize: 40,
         textAlign: "center",
-        marginBottom: 20,
+        marginBottom: 2,
         fontWeight: "bold",
         fontStyle: "italic",
-        letterSpacing: 3,
+        letterSpacing: 4,
     },
 
     categoriasScroll: {

@@ -216,6 +216,7 @@ export default function Home() {
                     contentContainerStyle={[
                         styles.lista,
                         isTablet && styles.listaDesktop,
+
                     ]}
 
                 >
@@ -254,105 +255,105 @@ export default function Home() {
                 </Animated.ScrollView>
 
             </View>
-    {/* BOTÓN CARRITO */}
-{!cartVisible && (
-    <TouchableOpacity
-        style={styles.cartButton}
-        onPress={toggleCart}
-    >
-        <Text style={{ color: '#FFF', fontWeight: 'bold' }}>🛒</Text>
-    </TouchableOpacity>
-)}
+            {/* BOTÓN CARRITO */}
+            {!cartVisible && (
+                <TouchableOpacity
+                    style={styles.cartButton}
+                    onPress={toggleCart}
+                >
+                    <Text style={{ color: '#FFF', fontWeight: 'bold' }}>🛒</Text>
+                </TouchableOpacity>
+            )}
 
-{/* BOTÓN MENÚ */}
-{!menuVisible && (
-    <TouchableOpacity
-        style={styles.menuButton}
-        onPress={toggleMenu}
-    >
-        <Text style={{ color: '#FFF', fontSize: 20 }}>☰</Text>
-    </TouchableOpacity>
-)}
+            {/* BOTÓN MENÚ */}
+            {!menuVisible && (
+                <TouchableOpacity
+                    style={styles.menuButton}
+                    onPress={toggleMenu}
+                >
+                    <Text style={{ color: '#FFF', fontSize: 20 }}>☰</Text>
+                </TouchableOpacity>
+            )}
 
-{/* FONDO OSCURO PARA CERRAR MENÚ */}
-{menuVisible && (
-    <TouchableOpacity
-        style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(0,0,0,0.5)',
-            zIndex: 8,
-        }}
-        onPress={toggleMenu}
-    />
-)}
+            {/* FONDO OSCURO PARA CERRAR MENÚ */}
+            {menuVisible && (
+                <TouchableOpacity
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        backgroundColor: 'rgba(0,0,0,0.5)',
+                        zIndex: 8,
+                    }}
+                    onPress={toggleMenu}
+                />
+            )}
 
-{/* FONDO OSCURO PARA CERRAR CARRITO */}
-{cartVisible && (
-    <TouchableOpacity
-        style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(0,0,0,0.5)',
-            zIndex: 8,
-        }}
-        onPress={toggleCart}
-    />
-)}
+            {/* FONDO OSCURO PARA CERRAR CARRITO */}
+            {cartVisible && (
+                <TouchableOpacity
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        backgroundColor: 'rgba(0,0,0,0.5)',
+                        zIndex: 8,
+                    }}
+                    onPress={toggleCart}
+                />
+            )}
 
-{/* PANEL DEL CARRITO */}
-{cartVisible && (
-    <Animated.View
-        style={[
-            styles.cartPanel,
-            { transform: [{ translateX: slideAnim }], zIndex: 9 },
-        ]}
-    >
-        <TouchableOpacity onPress={toggleCart}>
-            <Text style={{ color: '#FFF', fontSize: 18, marginBottom: 10 }}>
-                ✖ Cerrar
-            </Text>
-        </TouchableOpacity>
+            {/* PANEL DEL CARRITO */}
+            {cartVisible && (
+                <Animated.View
+                    style={[
+                        styles.cartPanel,
+                        { transform: [{ translateX: slideAnim }], zIndex: 9 },
+                    ]}
+                >
+                    <TouchableOpacity onPress={toggleCart}>
+                        <Text style={{ color: '#FFF', fontSize: 18, marginBottom: 10 }}>
+                            ✖ Cerrar
+                        </Text>
+                    </TouchableOpacity>
 
-        <Cart />
-    </Animated.View>
-)}
+                    <Cart />
+                </Animated.View>
+            )}
 
-{/* PANEL DEL MENÚ */}
-{menuVisible && (
-    <Animated.View
-        style={[
-            styles.menuPanel,
-            { transform: [{ translateX: slideMenu }], zIndex: 9 },
-        ]}
-    >
-        <TouchableOpacity onPress={toggleMenu}>
-            <Text style={{ color: '#FFF', fontSize: 18, marginBottom: 10 }}>
-                ✖ Cerrar
-            </Text>
-        </TouchableOpacity>
+            {/* PANEL DEL MENÚ */}
+            {menuVisible && (
+                <Animated.View
+                    style={[
+                        styles.menuPanel,
+                        { transform: [{ translateX: slideMenu }], zIndex: 9 },
+                    ]}
+                >
+                    <TouchableOpacity onPress={toggleMenu}>
+                        <Text style={{ color: '#FFF', fontSize: 18, marginBottom: 10 }}>
+                            ✖ Cerrar
+                        </Text>
+                    </TouchableOpacity>
 
-        <Text style={styles.menuTitle}>Menú</Text>
+                    <Text style={styles.menuTitle}>Menú</Text>
 
-        <TouchableOpacity>
-            <Text style={styles.menuItem}>Acerca de</Text>
-        </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Text style={styles.menuItem}>Acerca de</Text>
+                    </TouchableOpacity>
 
-        <TouchableOpacity>
-            <Text style={styles.menuItem}>Contacto</Text>
-        </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Text style={styles.menuItem}>Contacto</Text>
+                    </TouchableOpacity>
 
-        <TouchableOpacity onPress={cerrarSesion}>
-            <Text style={styles.menuItem}>Cerrar Sesion</Text>
-        </TouchableOpacity>
-    </Animated.View>
-)}
+                    <TouchableOpacity onPress={cerrarSesion}>
+                        <Text style={styles.menuItem}>Cerrar Sesion</Text>
+                    </TouchableOpacity>
+                </Animated.View>
+            )}
 
         </View>
     );
