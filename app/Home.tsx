@@ -1,5 +1,6 @@
 import { useRouter } from 'expo-router';
 import { useRef, useState } from 'react';
+import { useCart } from "../app/CartContext";
 import {
     Alert, Animated,
     Image, Platform, ScrollView,
@@ -11,25 +12,30 @@ import {
 import styles from '../src/styles/homeStyles';
 import Cart from './cart';
 
+const { addItem } = useCart();
 const pizzas = [
     {
         id: 1,
         nombre: 'Pepperoni',
+        precio: 150,
         imagen: require('../assets/homeImg/pepperoni.jpg'),
     },
     {
         id: 2,
         nombre: 'Hawaiana',
+        precio: 145,
         imagen: require('../assets/homeImg/hawaiana.jpg'),
     },
     {
         id: 3,
         nombre: 'Vegetariana',
+        precio: 140,
         imagen: require('../assets/homeImg/vegetariana.jpg'),
     },
     {
         id: 4,
         nombre: 'Arma tu pizza',
+        precio: 180,
         imagen: require('../assets/homeImg/armatupizza.jpg'),
     },
 ];
@@ -38,16 +44,19 @@ const bebidas = [
     {
         id: 1,
         nombre: 'Coca-Cola',
+        precio: 35,
         imagen: require('../assets/homeImg/cocacola.jpg'),
     },
     {
         id: 2,
         nombre: 'Jugo de naranja',
+        precio: 30,
         imagen: require('../assets/homeImg/naranja.jpg'),
     },
     {
         id: 3,
         nombre: 'Limonada',
+        precio: 30,
         imagen: require('../assets/homeImg/limonada.jpg'),
     },
 ];
@@ -241,8 +250,17 @@ export default function Home() {
                                     ]}
                                     onPress={() => {
                                         if (item.id === 4) {
-                                            router.push('/customize');
+                                            router.push("/customize");
+                                            return;
                                         }
+                                    
+                                        addItem({
+                                            id: item.id.toString(), 
+                                            name: item.nombre,
+                                            price: item.precio,
+                                            img: item.imagen,
+                                            type: categoria === "pizzas" ? "pizza" : "drink",
+                                        });
                                     }}
                                 >
                                     <Text
