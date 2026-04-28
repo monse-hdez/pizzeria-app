@@ -1,5 +1,5 @@
 import { useRouter } from 'expo-router';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import {
   Alert,
   Animated,
@@ -38,7 +38,7 @@ const bebidas = [
 ];
 
 // ================== COMPONENTE ==================
-export default function Home() {
+export default function Home({ route }: any) {
   const router = useRouter();
   const { width } = useWindowDimensions();
 
@@ -54,6 +54,26 @@ export default function Home() {
   const fadeAnim = useRef(new Animated.Value(1)).current;
 
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+
+  useEffect(() => {
+  if (route?.params?.nuevaPizza) {
+    setCartItems((prev) => {
+      const existe = prev.find(
+        item => item.id === route.params.nuevaPizza.id
+      );
+
+      if (existe) {
+        return prev.map(item =>
+          item.id === route.params.nuevaPizza.id
+            ? { ...item, qty: item.qty + 1 }
+            : item
+        );
+      }
+
+      return [...prev, route.params.nuevaPizza];
+    });
+  }
+}, [route?.params?.nuevaPizza]);
 
   // ================== FUNCIONES ==================
   const cerrarSesion = () => {

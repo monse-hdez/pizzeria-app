@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "expo-router";
 import {
   SafeAreaView,
   View,
@@ -10,38 +11,48 @@ import {
 
 export default function Customize() {
   const [seleccionados, setSeleccionados] = useState<string[]>([]);
+  const router = useRouter();
+  const precioBase = 150;
 
   const ingredientes = [
     {
       nombre: "Queso",
+      precio: 20,
       img: require("../assets/images/ingredientes/cheese.png"),
     },
     {
       nombre: "Pepperoni",
+      precio: 30,
       img: require("../assets/images/ingredientes/pepperoni.png"),
     },
     {
       nombre: "Jalapeños",
+      precio: 15,
       img: require("../assets/images/ingredientes/chilli.png"),
     },
     {
       nombre: "Piña",
+      precio: 25,
       img: require("../assets/images/ingredientes/pina.png"),
     },
     {
       nombre: "Philadelphia",
+      precio: 35,
       img: require("../assets/images/ingredientes/philadelphia.png"),
     },
     {
       nombre: "Champiñón",
+      precio: 20,
       img: require("../assets/images/ingredientes/champinion.png"),
     },
     {
       nombre: "Cebolla",
+      precio: 10,
       img: require("../assets/images/ingredientes/cebolla.png"),
     },
     {
       nombre: "Tocino",
+      precio: 40,
       img: require("../assets/images/ingredientes/tocino.png"),
     },
   ];
@@ -53,6 +64,30 @@ export default function Customize() {
       setSeleccionados([...seleccionados, item]);
     }
   };
+
+  const total = precioBase + ingredientes
+  .filter((item) => seleccionados.includes(item.nombre))
+  .reduce((sum, item) => sum + item.precio, 0);
+
+const agregarAlCarrito = () => {
+  const nuevaPizza = {
+    id: Date.now(),
+    name: "Pizza Personalizada",
+    price: total,
+    qty: 1,
+    img: require("../assets/images/ingredientes/pizzas.png"),
+  };
+
+  console.log("Pizza agregada:", nuevaPizza);
+
+  router.push({
+    pathname: "/",
+    params: {
+      nuevaPizza: JSON.stringify(nuevaPizza),
+    },
+  });
+};
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -232,12 +267,20 @@ export default function Customize() {
         ))}
       </View>
 
+      <Text style={styles.totalText}>
+        Total: ${total}
+      </Text>
+
       {/* Botón */}
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity 
+        style={styles.button}
+        onPress={agregarAlCarrito}
+        >
         <Text style={styles.buttonText}>Agregar</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
+
 }
 
 const styles = StyleSheet.create({
@@ -479,5 +522,12 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     fontWeight: "bold",
+  },
+
+  totalText: {
+    fontSize: 22,
+    fontWeight: "bold",
+    marginTop: 10,
+    color: "#c0392b",
   },
 });
