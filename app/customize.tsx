@@ -12,30 +12,12 @@ export default function Customize() {
   const [seleccionados, setSeleccionados] = useState<string[]>([]);
 
   const ingredientes = [
-    {
-      nombre: "Queso",
-      img: require("../assets/images/ingredientes/cheese.png"),
-    },
-    {
-      nombre: "Pepperoni",
-      img: require("../assets/images/ingredientes/pepperoni.png"),
-    },
-    {
-      nombre: "Jalapeños",
-      img: require("../assets/images/ingredientes/chilli.png"),
-    },
-    {
-      nombre: "Piña",
-      img: require("../assets/images/ingredientes/pina.png"),
-    },
-    {
-      nombre: "Philadelphia",
-      img: require("../assets/images/ingredientes/philadelphia.png"),
-    },
-    {
-      nombre: "Champiñón",
-      img: require("../assets/images/ingredientes/champinion.png"),
-    },
+    { nombre: "Queso", img: require("../assets/images/ingredientes/cheese.png") },
+    { nombre: "Pepperoni", img: require("../assets/images/ingredientes/pepperoni.png") },
+    { nombre: "Jalapeños", img: require("../assets/images/ingredientes/chilli.png") },
+    { nombre: "Piña", img: require("../assets/images/ingredientes/pina.png") },
+    { nombre: "Philadelphia", img: require("../assets/images/ingredientes/philadelphia.png") },
+    { nombre: "Champiñón", img: require("../assets/images/ingredientes/champinion.png") },
   ];
 
   const toggleIngrediente = (item: string) => {
@@ -48,125 +30,31 @@ export default function Customize() {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Título */}
       <Text style={styles.title}>Arma tu Pizza 🍕</Text>
 
-      {/* Contenedor de pizza */}
+      {/* Pizza */}
       <View style={styles.pizzaContainer}>
-        {/* Pizza base */}
         <Image
           source={require("../assets/images/ingredientes/pizzas.png")}
           style={styles.pizzaBase}
           resizeMode="contain"
         />
 
-        {/* QUESO */}
+        {/* Queso */}
         {seleccionados.includes("Queso") && (
           <>
-            <Image
-              source={require("../assets/images/ingredientes/cheese.png")}
-              style={styles.queso1}
-              resizeMode="contain"
-            />
-            <Image
-              source={require("../assets/images/ingredientes/cheese.png")}
-              style={styles.queso2}
-              resizeMode="contain"
-            />
-            <Image
-              source={require("../assets/images/ingredientes/cheese.png")}
-              style={styles.queso3}
-              resizeMode="contain"
-            />
+            <Image source={require("../assets/images/ingredientes/cheese.png")} style={styles.queso1} />
+            <Image source={require("../assets/images/ingredientes/cheese.png")} style={styles.queso2} />
+            <Image source={require("../assets/images/ingredientes/cheese.png")} style={styles.queso3} />
           </>
         )}
 
-        {/* PEPPERONI */}
+        {/* Pepperoni */}
         {seleccionados.includes("Pepperoni") && (
           <>
-            <Image
-              source={require("../assets/images/ingredientes/pepperoni.png")}
-              style={styles.pepperoni1}
-              resizeMode="contain"
-            />
-            <Image
-              source={require("../assets/images/ingredientes/pepperoni.png")}
-              style={styles.pepperoni2}
-              resizeMode="contain"
-            />
-            <Image
-              source={require("../assets/images/ingredientes/pepperoni.png")}
-              style={styles.pepperoni3}
-              resizeMode="contain"
-            />
-          </>
-        )}
-
-        {/* JALAPEÑOS */}
-        {seleccionados.includes("Jalapeños") && (
-          <>
-            <Image
-              source={require("../assets/images/ingredientes/chilli.png")}
-              style={styles.jalapeno1}
-              resizeMode="contain"
-            />
-            <Image
-              source={require("../assets/images/ingredientes/chilli.png")}
-              style={styles.jalapeno2}
-              resizeMode="contain"
-            />
-            <Image
-              source={require("../assets/images/ingredientes/chilli.png")}
-              style={styles.jalapeno3}
-              resizeMode="contain"
-            />
-          </>
-        )}
-
-        {/* PIÑA */}
-        {seleccionados.includes("Piña") && (
-          <>
-            <Image
-              source={require("../assets/images/ingredientes/pina.png")}
-              style={styles.pina1}
-              resizeMode="contain"
-            />
-            <Image
-              source={require("../assets/images/ingredientes/pina.png")}
-              style={styles.pina2}
-              resizeMode="contain"
-            />
-          </>
-        )}
-
-        {/* PHILADELPHIA */}
-        {seleccionados.includes("Philadelphia") && (
-          <>
-            <Image
-              source={require("../assets/images/ingredientes/philadelphia.png")}
-              style={styles.phila1}
-              resizeMode="contain"
-            />
-            <Image
-              source={require("../assets/images/ingredientes/philadelphia.png")}
-              style={styles.phila2}
-              resizeMode="contain"
-            />
-          </>
-        )}
-        {/* CHAMPIÑON */}
-        {seleccionados.includes("Champiñón") && (
-          <>
-            <Image
-              source={require("../assets/images/ingredientes/champinion.png")}
-              style={styles.champi1}
-              resizeMode="contain"
-            />
-            <Image
-              source={require("../assets/images/ingredientes/champinion.png")}
-              style={styles.champi2}
-              resizeMode="contain"
-            />
+            <Image source={require("../assets/images/ingredientes/pepperoni.png")} style={styles.pepperoni1} />
+            <Image source={require("../assets/images/ingredientes/pepperoni.png")} style={styles.pepperoni2} />
+            <Image source={require("../assets/images/ingredientes/pepperoni.png")} style={styles.pepperoni3} />
           </>
         )}
       </View>
@@ -184,17 +72,12 @@ export default function Customize() {
                 : styles.defaultCard,
             ]}
           >
-            <Image
-              source={item.img}
-              style={styles.icon}
-              resizeMode="contain"
-            />
+            <Image source={item.img} style={styles.icon} />
             <Text style={styles.cardText}>{item.nombre}</Text>
           </TouchableOpacity>
         ))}
       </View>
 
-      {/* Botón */}
       <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>Agregar</Text>
       </TouchableOpacity>
@@ -210,14 +93,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-
   title: {
     fontSize: 26,
     fontWeight: "bold",
     marginBottom: 15,
     color: "#6B3E26",
   },
-
   pizzaContainer: {
     width: 250,
     height: 250,
@@ -226,136 +107,19 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-
   pizzaBase: {
     width: 250,
     height: 250,
     position: "absolute",
   },
 
-  /* QUESO */
-  queso1: {
-    position: "absolute",
-    width: 45,
-    height: 45,
-    top: 40,
-    left: 50,
-  },
+  queso1: { position: "absolute", width: 45, height: 45, top: 40, left: 50 },
+  queso2: { position: "absolute", width: 40, height: 40, top: 120, right: 60 },
+  queso3: { position: "absolute", width: 42, height: 42, bottom: 90, left: 90 },
 
-  queso2: {
-    position: "absolute",
-    width: 40,
-    height: 40,
-    top: 120,
-    right: 60,
-  },
-
-  queso3: {
-    position: "absolute",
-    width: 42,
-    height: 42,
-    bottom: 90,
-    left: 90,
-  },
-
-  /* PEPPERONI */
-  pepperoni1: {
-    position: "absolute",
-    width: 40,
-    height: 40,
-    top: 60,
-    right: 50,
-  },
-
-  pepperoni2: {
-    position: "absolute",
-    width: 38,
-    height: 38,
-    top: 140,
-    left: 60,
-  },
-
-  pepperoni3: {
-    position: "absolute",
-    width: 42,
-    height: 42,
-    bottom: 40,
-    right: 80,
-  },
-
-  /* JALAPEÑOS */
-  jalapeno1: {
-    position: "absolute",
-    width: 45,
-    height: 45,
-    top: 35,
-    left: 100,
-  },
-
-  jalapeno2: {
-    position: "absolute",
-    width: 40,
-    height: 40,
-    top: 130,
-    right: 40,
-  },
-
-  jalapeno3: {
-    position: "absolute",
-    width: 42,
-    height: 42,
-    bottom: 60,
-    left: 70,
-  },
-
-  /* PIÑA */
-  pina1: {
-    position: "absolute",
-    width: 45,
-    height: 45,
-    top: 80,
-    left: 40,
-  },
-
-  pina2: {
-    position: "absolute",
-    width: 42,
-    height: 42,
-    bottom: 70,
-    right: 60,
-  },
-
-  /* PHILADELPHIA */
-  phila1: {
-    position: "absolute",
-    width: 40,
-    height: 40,
-    top: 90,
-    right: 70,
-  },
-
-  phila2: {
-    position: "absolute",
-    width: 42,
-    height: 42,
-    bottom: 50,
-    left: 110,
-  },
-  champi1: {
-    position: "absolute",
-    width: 40,
-    height: 40,
-    top: 90,
-    right: 120,
-  },
-
-  champi2: {
-    position: "absolute",
-    width: 42,
-    height: 42,
-    bottom: 40,
-    left: 90,
-  },
+  pepperoni1: { position: "absolute", width: 40, height: 40, top: 60, right: 50 },
+  pepperoni2: { position: "absolute", width: 38, height: 38, top: 140, left: 60 },
+  pepperoni3: { position: "absolute", width: 42, height: 42, bottom: 40, right: 80 },
 
   grid: {
     width: "100%",
@@ -363,7 +127,6 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "space-between",
   },
-
   card: {
     width: "48%",
     backgroundColor: "#fff",
@@ -372,28 +135,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 12,
   },
-
-  defaultCard: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-  },
-
+  defaultCard: { borderWidth: 1, borderColor: "#ccc" },
   selectedCard: {
     borderWidth: 2,
     borderColor: "#c0392b",
     backgroundColor: "#fff7f5",
   },
-
-  icon: {
-    width: 55,
-    height: 55,
-    marginBottom: 8,
-  },
-
-  cardText: {
-    fontSize: 14,
-    fontWeight: "500",
-  },
+  icon: { width: 55, height: 55, marginBottom: 8 },
+  cardText: { fontSize: 14, fontWeight: "500" },
 
   button: {
     marginTop: 10,
@@ -403,10 +152,5 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     alignItems: "center",
   },
-
-  buttonText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
+  buttonText: { color: "#fff", fontSize: 16, fontWeight: "bold" },
 });

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Image,
   ScrollView,
@@ -9,6 +9,7 @@ import {
   View
 } from "react-native";
 
+// ====== TIPOS ======
 type CartItem = {
   id: number;
   name: string;
@@ -17,43 +18,38 @@ type CartItem = {
   qty: number;
 };
 
-export default function Cart() {
+type Props = {
+  items: CartItem[];
+  setItems: React.Dispatch<React.SetStateAction<CartItem[]>>;
+};
+
+// ====== COMPONENTE ======
+export default function Cart({ items, setItems }: Props) {
   const { width } = useWindowDimensions();
   const isWeb = width > 600;
 
-  const [items, setItems] = useState<CartItem[]>([
-    {
-      id: 1,
-      name: "Pizza Pepperoni",
-      price: 150,
-      img: require("../assets/images/carrito/pizzza.png"),
-      qty: 1,
-    },
-    {
-      id: 2,
-      name: "Refresco Cola",
-      price: 50,
-      img: require("../assets/images/carrito/refresco.png"),
-      qty: 1,
-    },
-  ]);
-
+  // ====== FUNCIONES ======
   const increase = (id: number) => {
-    setItems(items.map(item =>
-      item.id === id ? { ...item, qty: item.qty + 1 } : item
-    ));
+    setItems(prev =>
+      prev.map(item =>
+        item.id === id ? { ...item, qty: item.qty + 1 } : item
+      )
+    );
   };
 
   const decrease = (id: number) => {
-    setItems(items.map(item =>
-      item.id === id && item.qty > 1
-        ? { ...item, qty: item.qty - 1 }
-        : item
-    ));
+    setItems(prev =>
+      prev.map(item =>
+        item.id === id && item.qty > 1
+          ? { ...item, qty: item.qty - 1 }
+          : item
+      )
+    );
   };
 
   const total = items.reduce((acc, item) => acc + item.price * item.qty, 0);
 
+  // ====== UI ======
   return (
     <ScrollView
       contentContainerStyle={[
@@ -66,6 +62,14 @@ export default function Cart() {
 
         <Text style={styles.header}>🛒 Carrito de Compras</Text>
 
+        {/* CARRITO VACÍO */}
+        {items.length === 0 && (
+          <Text style={{ textAlign: "center", marginTop: 20 }}>
+            Tu carrito está vacío 🥲
+          </Text>
+        )}
+
+        {/* PRODUCTOS */}
         {items.map((item) => (
           <View key={item.id} style={styles.card}>
             <Image source={item.img} style={styles.img} />
@@ -75,13 +79,19 @@ export default function Cart() {
               <Text>${item.price}.00</Text>
 
               <View style={styles.controls}>
-                <TouchableOpacity onPress={() => decrease(item.id)} style={styles.btn}>
+                <TouchableOpacity
+                  onPress={() => decrease(item.id)}
+                  style={styles.btn}
+                >
                   <Text style={styles.btnText}>−</Text>
                 </TouchableOpacity>
 
                 <Text style={styles.qty}>{item.qty}</Text>
 
-                <TouchableOpacity onPress={() => increase(item.id)} style={styles.btn}>
+                <TouchableOpacity
+                  onPress={() => increase(item.id)}
+                  style={styles.btn}
+                >
                   <Text style={styles.btnText}>+</Text>
                 </TouchableOpacity>
               </View>
@@ -89,6 +99,7 @@ export default function Cart() {
           </View>
         ))}
 
+        {/* TOTAL */}
         <View>
           <View style={styles.total}>
             <Text style={styles.totalText}>Total: ${total}.00</Text>
@@ -109,6 +120,7 @@ export default function Cart() {
   );
 }
 
+// ====== ESTILOS ======
 const styles = StyleSheet.create({
   screen: {
     flexGrow: 1,

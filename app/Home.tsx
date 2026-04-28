@@ -15,18 +15,26 @@ import {
 import styles from '../src/styles/homeStyles';
 import Cart from './cart';
 
+type CartItem = {
+  id: number;
+  name: string;
+  price: number;
+  img: any;
+  qty: number;
+};
+
 // ================== DATOS ==================
 const pizzas = [
-  { id: 1, nombre: 'Pepperoni', imagen: require('../assets/homeImg/pepperoni.jpg') },
-  { id: 2, nombre: 'Hawaiana', imagen: require('../assets/homeImg/hawaiana.jpg') },
-  { id: 3, nombre: 'Vegetariana', imagen: require('../assets/homeImg/vegetariana.jpg') },
-  { id: 4, nombre: 'Arma tu pizza', imagen: require('../assets/homeImg/armatupizza.jpg') },
+  { id: 1, nombre: 'Pepperoni', precio: 150, imagen: require('../assets/homeImg/pepperoni.jpg') },
+  { id: 2, nombre: 'Hawaiana', precio: 140, imagen: require('../assets/homeImg/hawaiana.jpg') },
+  { id: 3, nombre: 'Vegetariana', precio: 130, imagen: require('../assets/homeImg/vegetariana.jpg') },
+  { id: 4, nombre: 'Arma tu pizza', precio: 160, imagen: require('../assets/homeImg/armatupizza.jpg') },
 ];
 
 const bebidas = [
-  { id: 1, nombre: 'Coca-Cola', imagen: require('../assets/homeImg/cocacola.jpg') },
-  { id: 2, nombre: 'Jugo de naranja', imagen: require('../assets/homeImg/naranja.jpg') },
-  { id: 3, nombre: 'Limonada', imagen: require('../assets/homeImg/limonada.jpg') },
+  { id: 5, nombre: 'Coca-Cola', precio: 50, imagen: require('../assets/homeImg/cocacola.jpg') },
+  { id: 6, nombre: 'Jugo de naranja', precio: 45, imagen: require('../assets/homeImg/naranja.jpg') },
+  { id: 7, nombre: 'Limonada', precio: 40, imagen: require('../assets/homeImg/limonada.jpg') },
 ];
 
 // ================== COMPONENTE ==================
@@ -44,6 +52,8 @@ export default function Home() {
   const slideAnim = useRef(new Animated.Value(300)).current;
   const slideMenu = useRef(new Animated.Value(-300)).current;
   const fadeAnim = useRef(new Animated.Value(1)).current;
+
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   // ================== FUNCIONES ==================
   const cerrarSesion = () => {
@@ -66,6 +76,26 @@ export default function Home() {
     }
   };
 
+  const addToCart = (item: any) => {
+    setCartItems((prev) => {
+      const exist = prev.find(p => p.id === item.id);
+
+      if (exist) {
+        return prev.map(p =>
+          p.id === item.id ? { ...p, qty: p.qty + 1 } : p
+        );
+      }
+
+      return [...prev, { 
+        id: item.id,
+        name: item.nombre,
+        price: item.precio,
+        img: item.imagen,
+        qty: 1
+      }];
+    });
+  };
+  
   const toggleMenu = () => {
     if (menuVisible) {
       Animated.timing(slideMenu, {
@@ -196,10 +226,12 @@ export default function Home() {
                 <TouchableOpacity
                   style={styles.boton}
                   onPress={() => {
-                    if (item.id === 4) {
-                      router.push('/customize');
-                    }
-                  }}
+                  if (item.id === 4) {
+                  router.push('/customize');
+                  } else {
+                  addToCart(item); 
+                 }
+                }}
                 >
                   <Text style={styles.botonTexto}>Agregar</Text>
                 </TouchableOpacity>
@@ -248,7 +280,10 @@ export default function Home() {
           <TouchableOpacity onPress={toggleCart}>
             <Text style={{ color: '#FFF' }}>✖ Cerrar</Text>
           </TouchableOpacity>
-          <Cart />
+          <Cart 
+          items={cartItems}
+          setItems={setCartItems}
+          />
         </Animated.View>
       )}
 
