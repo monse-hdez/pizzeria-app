@@ -32,10 +32,6 @@ export default function Customize() {
       nombre: "Philadelphia",
       img: require("../assets/images/ingredientes/philadelphia.png"),
     },
-    {
-      nombre: "Champiñón",
-      img: require("../assets/images/ingredientes/champinion.png"),
-    },
   ];
 
   const toggleIngrediente = (item: string) => {
@@ -154,21 +150,6 @@ export default function Customize() {
             />
           </>
         )}
-        {/* CHAMPIÑON */}
-        {seleccionados.includes("Champiñón") && (
-          <>
-            <Image
-              source={require("../assets/images/ingredientes/champinion.png")}
-              style={styles.champi1}
-              resizeMode="contain"
-            />
-            <Image
-              source={require("../assets/images/ingredientes/champinion.png")}
-              style={styles.champi2}
-              resizeMode="contain"
-            />
-          </>
-        )}
       </View>
 
       {/* Ingredientes */}
@@ -205,7 +186,7 @@ export default function Customize() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f4e1c1",
+    backgroundColor: "#f5e6d3",
     padding: 20,
     alignItems: "center",
     justifyContent: "center",
@@ -254,7 +235,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: 42,
     height: 42,
-    bottom: 90,
+    bottom: 50,
     left: 90,
   },
 
@@ -340,21 +321,6 @@ const styles = StyleSheet.create({
     height: 42,
     bottom: 50,
     left: 110,
-  },
-  champi1: {
-    position: "absolute",
-    width: 40,
-    height: 40,
-    top: 90,
-    right: 120,
-  },
-
-  champi2: {
-    position: "absolute",
-    width: 42,
-    height: 42,
-    bottom: 40,
-    left: 90,
   },
 
   grid: {
