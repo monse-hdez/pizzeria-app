@@ -8,6 +8,7 @@ import {
   useWindowDimensions,
   View
 } from "react-native";
+import { useRouter } from "expo-router";
 
 // ====== TIPOS ======
 type CartItem = {
@@ -27,6 +28,7 @@ type Props = {
 export default function Cart({ items, setItems }: Props) {
   const { width } = useWindowDimensions();
   const isWeb = width > 600;
+  const router = useRouter();    
 
   // ====== FUNCIONES ======
   const increase = (id: number) => {
@@ -105,14 +107,19 @@ export default function Cart({ items, setItems }: Props) {
             <Text style={styles.totalText}>Total: ${total}.00</Text>
           </View>
 
-          <TouchableOpacity style={styles.checkoutBtn}>
-            <Text style={styles.checkoutText}>Finalizar Compra</Text>
-          </TouchableOpacity>
+          <TouchableOpacity
+           style={styles.checkoutBtn}
+           onPress={() =>
+           router.push({
+          pathname: "/checkout",
+           params: { items: JSON.stringify(items) }
+           })
+          }
+          >
+  <Text style={styles.checkoutText}>Finalizar Compra</Text>
+</TouchableOpacity>
 
-          <Image
-            source={require("../assets/images/carrito/pizzabajo.png")}
-            style={styles.bottomImage}
-          />
+          
         </View>
 
       </View>
