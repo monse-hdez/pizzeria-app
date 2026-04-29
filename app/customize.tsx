@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useRouter } from "expo-router";
+import { useRouter, useLocalSearchParams } from "expo-router";
 import {
   SafeAreaView,
   View,
@@ -12,6 +12,7 @@ import {
 export default function Customize() {
   const [seleccionados, setSeleccionados] = useState<string[]>([]);
   const router = useRouter();
+  const params = useLocalSearchParams();
   const precioBase = 150;
 
   const ingredientes = [
@@ -71,23 +72,26 @@ export default function Customize() {
 
 const agregarAlCarrito = () => {
   const nuevaPizza = {
-    id: Date.now(),
+    id: 999,
     name: "Pizza Personalizada",
     price: total,
     qty: 1,
     img: require("../assets/images/ingredientes/pizzas.png"),
   };
 
-  console.log("Pizza agregada:", nuevaPizza);
+  const carritoAnterior = params.carritoActual
+    ? JSON.parse(params.carritoActual as string)
+    : [];
+
+  const carritoFinal = [...carritoAnterior, nuevaPizza];
 
   router.push({
-    pathname: "/",
+    pathname: "/home" as any,
     params: {
-      nuevaPizza: JSON.stringify(nuevaPizza),
+      carritoCompleto: JSON.stringify(carritoFinal),
     },
   });
 };
-
 
   return (
     <SafeAreaView style={styles.container}>

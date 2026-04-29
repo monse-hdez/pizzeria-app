@@ -1,4 +1,4 @@
-import { useRouter } from 'expo-router';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import { useRef, useState, useEffect } from 'react';
 import {
   Alert,
@@ -38,8 +38,9 @@ const bebidas = [
 ];
 
 // ================== COMPONENTE ==================
-export default function Home({ route }: any) {
+export default function Home() {
   const router = useRouter();
+  const params = useLocalSearchParams();
   const { width } = useWindowDimensions();
 
   const isTablet = width >= 768;
@@ -55,25 +56,29 @@ export default function Home({ route }: any) {
 
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-  useEffect(() => {
-  if (route?.params?.nuevaPizza) {
+useEffect(() => {
+  if (params.nuevaPizza) {
+    const pizzaNueva = JSON.parse(params.nuevaPizza as string);
+
     setCartItems((prev) => {
+      // Revisar si ya existe esa pizza personalizada
       const existe = prev.find(
-        item => item.id === route.params.nuevaPizza.id
+        (item) => item.id === pizzaNueva.id
       );
 
       if (existe) {
-        return prev.map(item =>
-          item.id === route.params.nuevaPizza.id
+        return prev.map((item) =>
+          item.id === pizzaNueva.id
             ? { ...item, qty: item.qty + 1 }
             : item
         );
       }
 
-      return [...prev, route.params.nuevaPizza];
+      // Mantener TODO lo anterior + agregar nueva pizza
+      return [...prev, pizzaNueva];
     });
   }
-}, [route?.params?.nuevaPizza]);
+}, [params.nuevaPizza]);
 
   // ================== FUNCIONES ==================
   const cerrarSesion = () => {
@@ -247,7 +252,12 @@ export default function Home({ route }: any) {
                   style={styles.boton}
                   onPress={() => {
                   if (item.id === 4) {
-                  router.push('/customize');
+                    router.push({
+                    pathname: "/customize",
+                    params: {
+                    carritoActual: JSON.stringify(cartItems),
+                  },
+                });
                   } else {
                   addToCart(item); 
                  }
