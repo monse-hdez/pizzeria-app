@@ -9,7 +9,7 @@ type Props = {
 
 export default function ProductCard({ item, onAdd, onCustomize }: Props) {
 
-    const { width } = useWindowDimensions(); // ✅ DENTRO del componente
+    const { width } = useWindowDimensions();
 
     const getCardStyle = () => {
         if (width > 1000) return styles.cardDesktop;

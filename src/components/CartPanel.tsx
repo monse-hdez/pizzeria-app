@@ -35,7 +35,7 @@ export default function CartPanel({ visible, slideAnim, toggleCart }: Props) {
             }}
         >
 
-            {/* 🔥 OVERLAY */}
+            {/* OVERLAY */}
             <TouchableOpacity
                 activeOpacity={1}
                 onPress={toggleCart}
@@ -49,7 +49,7 @@ export default function CartPanel({ visible, slideAnim, toggleCart }: Props) {
                 }}
             />
 
-            {/* 🔥 PANEL */}
+            {/*  PANEL */}
             <Animated.View
                 style={{
                     transform: [{ translateX: slideAnim }],
@@ -63,12 +63,12 @@ export default function CartPanel({ visible, slideAnim, toggleCart }: Props) {
                 }}
             >
 
-                {/* 🔴 BOTÓN CERRAR */}
+                {/*  BOTÓN CERRAR */}
                 <TouchableOpacity onPress={toggleCart} style={{ padding: 10 }}>
                     <Text style={{ color: '#000' }}>✖ Cerrar</Text>
                 </TouchableOpacity>
 
-                {/* 🔥 CONTENIDO */}
+                {/*  CONTENIDO */}
                 <Cart />
 
             </Animated.View>

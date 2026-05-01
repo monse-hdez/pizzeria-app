@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        paddingBottom: 30,   // 👈 espacio abajo (separa de las cards)
+        paddingBottom: 30,
         marginTop: 30,
 
     },

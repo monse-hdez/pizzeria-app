@@ -10,8 +10,7 @@ import CategoryTabs from '../src/components/CategoryTabs';
 import MenuPanel from '../src/components/MenuPanel';
 import ProductCard from '../src/components/ProductCard';
 
-import { useCart } from '../app/CartContext'; // ✅ CONTEXT
-// ✅ TIPOS
+import { useCart } from '../app/CartContext';
 type Product = {
   id: number;
   nombre: string;
@@ -32,9 +31,9 @@ export default function Home() {
   const slideAnim = useRef(new Animated.Value(300)).current;
   const slideMenu = useRef(new Animated.Value(-300)).current;
 
-  const { addItem } = useCart(); // ✅ USO DEL CONTEXT
+  const { addItem } = useCart(); //  USO DEL CONTEXT
 
-  // ✅ AGREGAR AL CARRITO (YA CON CONTEXT)
+  // AGREGAR AL CARRITO 
   const addToCart = (item: Product) => {
     addItem({
       id: String(item.id),
@@ -91,14 +90,14 @@ export default function Home() {
         <Text style={{ color: '#FFF' }}>☰</Text>
       </TouchableOpacity>
 
-      {/* 🔥 PANEL CARRITO */}
+      {/* PANEL CARRITO */}
       <CartPanel
         visible={cartVisible}
         slideAnim={slideAnim}
         toggleCart={() => setCartVisible(false)}
       />
 
-      {/* 🔥 PANEL MENÚ */}
+      {/* PANEL MENÚ */}
       <MenuPanel
         visible={menuVisible}
         slideMenu={slideMenu}

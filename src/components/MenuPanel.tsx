@@ -19,7 +19,7 @@ export default function MenuPanel({ visible, slideMenu, toggleMenu, cerrarSesion
         }).start();
     }, [visible]);
 
-    // 👉 si no está visible, no renderiza nada
+
     if (!visible) return null;
 
     return (
@@ -32,7 +32,7 @@ export default function MenuPanel({ visible, slideMenu, toggleMenu, cerrarSesion
             zIndex: 999
         }}>
 
-            {/* 🔥 FONDO OSCURO (bloquea todo) */}
+            {/* FONDO OSCURO (bloquea todo) */}
             <TouchableOpacity
                 activeOpacity={1}
                 onPress={toggleMenu}
@@ -44,7 +44,7 @@ export default function MenuPanel({ visible, slideMenu, toggleMenu, cerrarSesion
                 }}
             />
 
-            {/* 🔥 MENÚ */}
+            {/*  MENÚ */}
             <Animated.View style={[
                 styles.menuPanel,
                 {
