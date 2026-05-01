@@ -1,3 +1,4 @@
+import { useRouter } from "expo-router";
 import React from "react";
 import {
   Image,
@@ -8,57 +9,22 @@ import {
   useWindowDimensions,
   View
 } from "react-native";
-import { useRouter } from "expo-router";
-
-// ====== TIPOS ======
-type CartItem = {
-  id: number;
-  name: string;
-  price: number;
-  img: any;
-  qty: number;
-};
-
-type Props = {
-  items: CartItem[];
-  setItems: React.Dispatch<React.SetStateAction<CartItem[]>>;
-};
+import { useCart } from "./CartContext"; // ✅ correcto
 
 // ====== COMPONENTE ======
-export default function Cart({ items, setItems }: Props) {
+export default function Cart() {
+  const { items, increase, decrease, total } = useCart(); // ✅ usar funciones del context
   const { width } = useWindowDimensions();
   const isWeb = width > 600;
-  const router = useRouter();    
+  const router = useRouter();
 
-  // ====== FUNCIONES ======
-  const increase = (id: number) => {
-    setItems(prev =>
-      prev.map(item =>
-        item.id === id ? { ...item, qty: item.qty + 1 } : item
-      )
-    );
-  };
-
-  const decrease = (id: number) => {
-    setItems(prev =>
-      prev.map(item =>
-        item.id === id && item.qty > 1
-          ? { ...item, qty: item.qty - 1 }
-          : item
-      )
-    );
-  };
-
-  const total = items.reduce((acc, item) => acc + item.price * item.qty, 0);
-
-  // ====== UI ======
   return (
     <ScrollView
-      contentContainerStyle={[
-        styles.screen,
-        { flexGrow: 1 },
-        isWeb && { justifyContent: "center", alignItems: "center" }
-      ]}
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={{
+        padding: 15,
+        paddingBottom: 30
+      }}
     >
       <View style={[styles.container, isWeb && { width: 400 }]}>
 
@@ -73,8 +39,8 @@ export default function Cart({ items, setItems }: Props) {
 
         {/* PRODUCTOS */}
         {items.map((item) => (
-          <View key={item.id} style={styles.card}>
-            <Image source={item.img} style={styles.img} />
+          <View key={item.cartKey} style={styles.card}>
+            {item.img && <Image source={item.img} style={styles.img} />}
 
             <View style={styles.info}>
               <Text style={styles.name}>{item.name}</Text>
@@ -82,7 +48,7 @@ export default function Cart({ items, setItems }: Props) {
 
               <View style={styles.controls}>
                 <TouchableOpacity
-                  onPress={() => decrease(item.id)}
+                  onPress={() => decrease(item.cartKey!)}
                   style={styles.btn}
                 >
                   <Text style={styles.btnText}>−</Text>
@@ -91,7 +57,7 @@ export default function Cart({ items, setItems }: Props) {
                 <Text style={styles.qty}>{item.qty}</Text>
 
                 <TouchableOpacity
-                  onPress={() => increase(item.id)}
+                  onPress={() => increase(item.cartKey!)}
                   style={styles.btn}
                 >
                   <Text style={styles.btnText}>+</Text>
@@ -108,18 +74,16 @@ export default function Cart({ items, setItems }: Props) {
           </View>
 
           <TouchableOpacity
-           style={styles.checkoutBtn}
-           onPress={() =>
-           router.push({
-          pathname: "/checkout",
-           params: { items: JSON.stringify(items) }
-           })
-          }
+            style={styles.checkoutBtn}
+            onPress={() =>
+              router.push({
+                pathname: "/checkout",
+                params: { items: JSON.stringify(items) }
+              })
+            }
           >
-  <Text style={styles.checkoutText}>Finalizar Compra</Text>
-</TouchableOpacity>
-
-          
+            <Text style={styles.checkoutText}>Finalizar Compra</Text>
+          </TouchableOpacity>
         </View>
 
       </View>
@@ -130,7 +94,6 @@ export default function Cart({ items, setItems }: Props) {
 // ====== ESTILOS ======
 const styles = StyleSheet.create({
   screen: {
-    flexGrow: 1,
     backgroundColor: "#d6c39a",
     padding: 15,
   },
@@ -140,8 +103,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#f4e1c1",
     borderRadius: 20,
     padding: 15,
-    flex: 1,
-    justifyContent: "space-between",
   },
 
   header: {
@@ -224,12 +185,5 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
     fontWeight: "bold",
-  },
-
-  bottomImage: {
-    width: "100%",
-    height: 180,
-    marginTop: 15,
-    borderRadius: 15,
   },
 });

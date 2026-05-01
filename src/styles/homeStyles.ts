@@ -2,22 +2,21 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         backgroundColor: '#1E1E1E',
         paddingTop: 115,
         paddingHorizontal: 15,
-        alignItems: 'center',
     },
 
     wrapper: {
-        flex:1,
+        flex: 1,
         width: '100%',
         maxWidth: 1200,
+        alignSelf: 'center',
     },
 
     title: {
         color: "#fff",
-        fontSize: 40,
+        fontSize: 35,
         textAlign: "center",
         marginBottom: 2,
         fontWeight: "bold",
@@ -29,7 +28,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        paddingBottom: 10,
+        paddingBottom: 30,   // 👈 espacio abajo (separa de las cards)
+        marginTop: 30,
 
     },
 
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 25,
         borderRadius: 12,
-        marginHorizontal: 5,
+        marginHorizontal: 20,
     },
 
     tabActivo: {
@@ -58,13 +58,13 @@ const styles = StyleSheet.create({
 
     tabTexto: {
         color: '#FFF',
-        fontSize: 14,
+        fontSize: 17,
     },
 
     tabTextoActivo: {
         color: '#000',
         fontWeight: 'bold',
-        fontSize: 14,
+        fontSize: 17,
     },
 
     tabDesktop: {
@@ -75,8 +75,6 @@ const styles = StyleSheet.create({
     tabTextoDesktop: {
         fontSize: 18,
     },
-
-
 
     lista: {
         paddingBottom: 20,
@@ -95,16 +93,19 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         overflow: 'hidden',
         width: '100%',
+        alignItems: "center",
     },
 
     cardTablet: {
         width: '45%',
         marginBottom: 20,
+        alignItems: "center",
     },
 
     cardDesktop: {
         width: 320,
         margin: 10,
+        alignItems: "center",
     },
 
     imagen: {
@@ -129,15 +130,15 @@ const styles = StyleSheet.create({
 
     boton: {
         backgroundColor: '#2ECC71',
-        paddingVertical: 6,
-        paddingHorizontal: 12,
-        borderRadius: 8,
+        paddingVertical: 8,
+        paddingHorizontal: 30,
+        borderRadius: 15,
     },
 
     botonTexto: {
         color: '#FFF',
         fontWeight: 'bold',
-        fontSize: 13,
+        fontSize: 15,
     },
 
     botonDesktop: {
@@ -156,6 +157,7 @@ const styles = StyleSheet.create({
         padding: 15,
         borderRadius: 50,
         zIndex: 10,
+        alignItems: "center",
     },
 
     cartPanel: {
@@ -167,6 +169,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#2C2C2C',
         padding: 20,
         zIndex: 9,
+        alignItems: "center",
     },
 
     cartTitle: {
@@ -174,6 +177,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         marginBottom: 15,
+        alignItems: "center",
     },
     menuButton: {
         position: 'absolute',
@@ -208,6 +212,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginBottom: 15,
     },
+
 });
 
 export default styles;
