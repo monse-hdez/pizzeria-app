@@ -48,7 +48,7 @@ export default function Home() {
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
-        <Text style={styles.title}>Pizzería "Bella"</Text>
+        <Text style={styles.title}>Pizzería " Bella "</Text>
 
         <CategoryTabs
           categoria={categoria}
