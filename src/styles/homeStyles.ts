@@ -5,6 +5,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#1E1E1E',
         paddingTop: 110,
         paddingHorizontal: 20,
+        overflow: 'hidden',
+        flex: 1,
     },
 
     wrapper: {
@@ -18,7 +20,7 @@ const styles = StyleSheet.create({
         color: "#fff",
         fontSize: 35,
         textAlign: "center",
-        marginBottom: 2,
+        marginBottom: 10,
         fontWeight: "bold",
         fontStyle: "italic",
         letterSpacing: 4,
@@ -27,10 +29,7 @@ const styles = StyleSheet.create({
     categoriasScroll: {
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center',
-        paddingBottom: 30,
-        marginTop: 30,
-
+        marginTop: 5,
     },
 
     categoriasDesktop: {
@@ -45,7 +44,8 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 25,
         borderRadius: 12,
-        marginHorizontal: 20,
+        marginHorizontal: 5,
+        alignSelf: 'center', 
     },
 
     tabActivo: {
@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 25,
         borderRadius: 12,
         marginHorizontal: 5,
+        alignSelf: 'center', 
     },
 
     tabTexto: {
@@ -88,12 +89,10 @@ const styles = StyleSheet.create({
     },
 
     card: {
-        backgroundColor: '#2C2C2C',
+        backgroundColor: '#2c2a29',
         borderRadius: 15,
         marginBottom: 15,
         overflow: 'hidden',
-        width: '100%',
-        alignItems: "center",
     },
 
     cardTablet: {
@@ -110,19 +109,20 @@ const styles = StyleSheet.create({
 
     imagen: {
         width: '100%',
-        height: 180,
-        resizeMode: 'cover',
+        height: 120, 
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15,
     },
 
     info: {
-        padding: 12,
+        padding: 10,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
     },
 
     nombre: {
-        color: '#FFF',
+        color: '#f7f6f4',
         fontSize: 18,
         fontWeight: 'bold',
     },
@@ -130,13 +130,14 @@ const styles = StyleSheet.create({
 
     boton: {
         backgroundColor: '#2ECC71',
-        paddingVertical: 8,
-        paddingHorizontal: 30,
-        borderRadius: 15,
+        paddingHorizontal: 15,
+        borderRadius: 10,
+        height: 35,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
-
     botonTexto: {
-        color: '#FFF',
+        color: '#f8f8f8',
         fontWeight: 'bold',
         fontSize: 15,
     },
@@ -170,6 +171,7 @@ const styles = StyleSheet.create({
         padding: 20,
         zIndex: 9,
         alignItems: "center",
+        overflow: 'hidden',
     },
 
     cartTitle: {
@@ -201,14 +203,14 @@ const styles = StyleSheet.create({
     },
 
     menuTitle: {
-        color: '#FFF',
+        color: '#f9f7f7',
         fontSize: 22,
         fontWeight: 'bold',
         marginBottom: 20,
     },
 
     menuItem: {
-        color: '#FFF',
+        color: '#fdf6f6',
         fontSize: 16,
         marginBottom: 15,
     },
@@ -225,7 +227,7 @@ const styles = StyleSheet.create({
     },
 
     cartBadgeText: {
-        color: '#FFF',
+        color: '#fcf9f9',
         fontSize: 12,
         fontWeight: 'bold',
     },

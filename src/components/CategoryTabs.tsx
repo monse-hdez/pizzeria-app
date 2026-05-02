@@ -28,7 +28,15 @@ export default function CategoryTabs({ categoria, setCategoria, isDesktop }: Pro
     }
 
     return (
-        <ScrollView horizontal>
+        <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{
+                alignItems: 'center',
+                paddingVertical: 0, 
+            }}
+            style={{ flexGrow: 0 }} 
+        >
             {Tab('pizzas')}
             {Tab('bebidas')}
         </ScrollView>

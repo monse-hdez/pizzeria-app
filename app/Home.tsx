@@ -57,13 +57,14 @@ export default function Home() {
         />
 
         <Animated.ScrollView
+          style={{ flex: 1 }}
+          horizontal={false}
+          showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
-
           contentContainerStyle={[
-            { paddingBottom: 40, flexGrow: 1 },
+            { paddingBottom: 10 },
             isDesktop && styles.listaDesktop
           ]}
-
         >
           {(categoria === 'pizzas' ? pizzas : bebidas).map((item: Product) => (
             <ProductCard
@@ -114,7 +115,7 @@ export default function Home() {
         toggleMenu={() => setMenuVisible(false)}
 
         cerrarSesion={() => {
-          clearCart();        // 🔥 limpia el carrito
+          clearCart();       
           router.replace("/login");
         }}
       />
