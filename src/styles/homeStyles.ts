@@ -3,8 +3,8 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#1E1E1E',
-        paddingTop: 115,
-        paddingHorizontal: 15,
+        paddingTop: 110,
+        paddingHorizontal: 20,
     },
 
     wrapper: {
@@ -212,7 +212,23 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginBottom: 15,
     },
+    cartBadge: {
+        position: 'absolute',
+        top: -6,
+        right: -6,
+        backgroundColor: 'red',
+        borderRadius: 999,
+        minWidth: 20,
+        height: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 
+    cartBadgeText: {
+        color: '#FFF',
+        fontSize: 12,
+        fontWeight: 'bold',
+    },
 });
 
 export default styles;

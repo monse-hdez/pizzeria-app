@@ -30,9 +30,11 @@ export default function Home() {
 
   const slideAnim = useRef(new Animated.Value(300)).current;
   const slideMenu = useRef(new Animated.Value(-300)).current;
-
-  const { addItem } = useCart(); //  USO DEL CONTEXT
-
+  const { addItem, items, clearCart } = useCart();
+  const totalItems = items.reduce(
+    (total, item) => total + item.qty,
+    0
+  );
   // AGREGAR AL CARRITO 
   const addToCart = (item: Product) => {
     addItem({
@@ -80,6 +82,14 @@ export default function Home() {
         onPress={() => setCartVisible(true)}
       >
         <Text style={{ color: '#FFF' }}>🛒</Text>
+
+        {totalItems > 0 && (
+          <View style={styles.cartBadge}>
+            <Text style={styles.cartBadgeText}>
+              {totalItems}
+            </Text>
+          </View>
+        )}
       </TouchableOpacity>
 
       {/* ☰ BOTÓN MENÚ */}
@@ -102,7 +112,11 @@ export default function Home() {
         visible={menuVisible}
         slideMenu={slideMenu}
         toggleMenu={() => setMenuVisible(false)}
-        cerrarSesion={() => router.replace("/login")}
+
+        cerrarSesion={() => {
+          clearCart();        // 🔥 limpia el carrito
+          router.replace("/login");
+        }}
       />
     </View >
   );
