@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useRouter, useLocalSearchParams } from "expo-router";
+import { useRouter } from "expo-router";
+import { useCart } from "../app/CartContext";
 import {
   SafeAreaView,
   View,
@@ -12,8 +13,8 @@ import {
 export default function Customize() {
   const [seleccionados, setSeleccionados] = useState<string[]>([]);
   const router = useRouter();
-  const params = useLocalSearchParams();
   const precioBase = 150;
+  const { addItem } = useCart();
 
   const ingredientes = [
     {
@@ -72,25 +73,15 @@ export default function Customize() {
 
 const agregarAlCarrito = () => {
   const nuevaPizza = {
-    id: 999,
+    id: Date.now().toString(), // importante que sea string
     name: "Pizza Personalizada",
     price: total,
-    qty: 1,
     img: require("../assets/images/ingredientes/pizzas.png"),
   };
 
-  const carritoAnterior = params.carritoActual
-    ? JSON.parse(params.carritoActual as string)
-    : [];
+  addItem(nuevaPizza);
 
-  const carritoFinal = [...carritoAnterior, nuevaPizza];
-
-  router.push({
-    pathname: "/home" as any,
-    params: {
-      carritoCompleto: JSON.stringify(carritoFinal),
-    },
-  });
+  router.back(); // regresa al home
 };
 
   return (
