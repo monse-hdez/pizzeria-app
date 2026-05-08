@@ -62,14 +62,14 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   };
 
   const decrease = (cartKey: string) => {
-    setItems((prev) =>
+    setItems(prev =>
       prev
-        .map((item) =>
-          item.cartKey === cartKey && item.qty > 1
+        .map(item =>
+          item.cartKey === cartKey
             ? { ...item, qty: item.qty - 1 }
             : item
         )
-        .filter((item) => item.qty > 0)
+        .filter(item => item.qty > 0)
     );
   };
 
