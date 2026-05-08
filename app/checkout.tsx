@@ -7,7 +7,8 @@ import {
   View,
   useWindowDimensions,
 } from "react-native";
-import { useLocalSearchParams } from "expo-router";
+
+import { router, useLocalSearchParams } from "expo-router";
 
 // ====== TIPOS ======
 type CartItem = {
@@ -46,28 +47,56 @@ export default function Checkout({ setItems }: Props) {
   // ====== ACCIÓN ======
   const finalizarCompra = () => {
     alert("✅ Pedido realizado con éxito");
+
     setItems([]); // limpia carrito
+
+    router.replace("/Home");
   };
 
   return (
     <ScrollView
       contentContainerStyle={[
         styles.screen,
-        isWeb && { justifyContent: "center", alignItems: "center" },
+        isWeb && {
+          justifyContent: "center",
+          alignItems: "center",
+        },
       ]}
     >
-      <View style={[styles.ticket, isWeb && { width: 400 }]}>
-        <Text style={styles.title}>🧾 Ticket de Compra</Text>
+      {/* BOTÓN REGRESAR */}
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => router.back()}
+      >
+        <Text style={styles.backText}>← Volver</Text>
+      </TouchableOpacity>
+
+      {/* TICKET */}
+      <View
+        style={[
+          styles.ticket,
+          isWeb && { width: 400 },
+        ]}
+      >
+        <Text style={styles.title}>
+          🧾 Ticket de Compra
+        </Text>
 
         {/* LISTA */}
         {parsedItems.length === 0 ? (
-          <Text style={styles.empty}>No hay productos 🥲</Text>
+          <Text style={styles.empty}>
+            No hay productos 🥲
+          </Text>
         ) : (
           parsedItems.map((item) => (
-            <View key={item.id} style={styles.row}>
+            <View
+              key={item.id}
+              style={styles.row}
+            >
               <Text style={styles.itemText}>
                 {item.name} x{item.qty}
               </Text>
+
               <Text style={styles.itemText}>
                 ${item.price * item.qty}.00
               </Text>
@@ -80,23 +109,43 @@ export default function Checkout({ setItems }: Props) {
 
         {/* RESUMEN */}
         <View style={styles.row}>
-          <Text style={styles.label}>Subtotal</Text>
-          <Text>${subtotal.toFixed(2)}</Text>
+          <Text style={styles.label}>
+            Subtotal
+          </Text>
+
+          <Text>
+            ${subtotal.toFixed(2)}
+          </Text>
         </View>
 
         <View style={styles.row}>
-          <Text style={styles.label}>IVA (16%)</Text>
-          <Text>${iva.toFixed(2)}</Text>
+          <Text style={styles.label}>
+            IVA (16%)
+          </Text>
+
+          <Text>
+            ${iva.toFixed(2)}
+          </Text>
         </View>
 
         <View style={styles.row}>
-          <Text style={styles.totalLabel}>Total</Text>
-          <Text style={styles.totalValue}>${total.toFixed(2)}</Text>
+          <Text style={styles.totalLabel}>
+            Total
+          </Text>
+
+          <Text style={styles.totalValue}>
+            ${total.toFixed(2)}
+          </Text>
         </View>
 
         {/* BOTÓN */}
-        <TouchableOpacity style={styles.button} onPress={finalizarCompra}>
-          <Text style={styles.buttonText}>Confirmar Pedido</Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={finalizarCompra}
+        >
+          <Text style={styles.buttonText}>
+            Confirmar Pedido
+          </Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -109,6 +158,21 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     backgroundColor: "#d6c39a",
     padding: 20,
+  },
+
+  backButton: {
+    marginBottom: 15,
+    alignSelf: "flex-start",
+    backgroundColor: "#8B0000",
+    paddingHorizontal: 15,
+    paddingVertical: 8,
+    borderRadius: 10,
+  },
+
+  backText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
   },
 
   ticket: {

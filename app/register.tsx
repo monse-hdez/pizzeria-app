@@ -17,27 +17,51 @@ export default function RegisterScreen() {
   const [correo, setCorreo] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleRegister = async () => {
-    if (!nombre || !correo || !password) {
-      Alert.alert('Error', 'Completa todos los campos');
-      return;
-    }
+const handleRegister = async () => {
+  console.log("Botón funcionando");
 
-    try {
+  if (!nombre || !correo || !password) {
+    alert("Completa todos los campos");
+    return;
+  }
+
+  try {
+
+    const userCredential =
       await createUserWithEmailAndPassword(
         auth,
         correo,
         password
       );
 
-      Alert.alert('Éxito', 'Usuario registrado correctamente');
+    console.log("USUARIO CREADO:", userCredential);
 
-      router.push('/login');
+    alert("Registro guardado correctamente");
 
-    } catch (error: any) {
-      Alert.alert('Error', error.message);
+    router.replace('/login');
+
+  } catch (error: any) {
+
+    console.log("ERROR COMPLETO:", error);
+
+    if (error.code === 'auth/email-already-in-use') {
+
+      alert("Ese correo ya existe");
+
+    } else if (error.code === 'auth/weak-password') {
+
+      alert("La contraseña debe tener mínimo 6 caracteres");
+
+    } else if (error.code === 'auth/invalid-email') {
+
+      alert("Correo inválido");
+
+    } else {
+
+      alert(error.message);
     }
-  };
+  }
+};
 
   return (
     <View style={styles.container}>
