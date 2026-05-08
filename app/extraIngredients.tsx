@@ -8,17 +8,30 @@ import {
   View,
 } from "react-native";
 
+
+
 export default function ExtraIngredients() {
   const [seleccionados, setSeleccionados] = useState<string[]>([]);
 
+const pizzaName = "Pepperoni";
+const pizzaBasePrice = 250;
+
   const extras = [
-    { nombre: "Queso Extra", img: require("../assets/images/ingredientes/cheese.png") },
-    { nombre: "Pepperoni Extra", img: require("../assets/images/ingredientes/pepperoni.png") },
-    { nombre: "Champiñones", img: require("../assets/images/ingredientes/champinion.png") },
-    { nombre: "Jalapeños", img: require("../assets/images/ingredientes/chilli.png") },
-    { nombre: "Cebolla", img: require("../assets/images/ingredientes/cebolla.png") },
-    { nombre: "Tocino", img: require("../assets/images/ingredientes/tocino.png") },
+    { nombre: "Queso Extra", precio: 20, img: require("../assets/images/ingredientes/cheese.png") },
+    { nombre: "Pepperoni Extra", precio: 30, img: require("../assets/images/ingredientes/pepperoni.png") },
+    { nombre: "Champiñones Extra", precio: 15, img: require("../assets/images/ingredientes/champinion.png") },
+    { nombre: "Jalapeños Extra", precio: 10, img: require("../assets/images/ingredientes/chilli.png") },
+    { nombre: "Cebolla Extra", precio: 10, img: require("../assets/images/ingredientes/cebolla.png") },
+    { nombre: "Tocino Extra", precio: 35, img: require("../assets/images/ingredientes/tocino.png") },
+    { nombre: "Piña Extra", precio: 20, img: require("../assets/images/ingredientes/pina.png")},
+    { nombre: "Salchicha Extra", precio: 25, img: require("../assets/images/ingredientes/salchicha.png")},
   ];
+
+  const totalPrice =
+  pizzaBasePrice +
+  extras
+    .filter((item) => seleccionados.includes(item.nombre))
+    .reduce((sum, item) => sum + item.precio, 0);
 
   const toggleExtra = (item: string) => {
     if (seleccionados.includes(item)) {
@@ -67,6 +80,9 @@ export default function ExtraIngredients() {
       </View>
 
       {/* Botón */}
+      <Text style={styles.totalText}>
+        {pizzaName}: ${totalPrice}
+      </Text>
       <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>Confirmar Pedido</Text>
       </TouchableOpacity>
@@ -154,5 +170,13 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     fontWeight: "bold",
+  },
+
+  totalText : {
+    fontSize: 22,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginVertical: 15,
+    color: "#fff",
   },
 });
