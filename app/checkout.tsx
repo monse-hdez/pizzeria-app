@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from "expo-router";
 import {
   ScrollView,
   StyleSheet,
@@ -25,6 +26,7 @@ type Props = {
 
 // ====== COMPONENTE ======
 export default function Checkout({ setItems }: Props) {
+  const router = useRouter();
   const { width } = useWindowDimensions();
   const isWeb = width > 600;
 
@@ -63,14 +65,6 @@ export default function Checkout({ setItems }: Props) {
         },
       ]}
     >
-      {/* BOTÓN REGRESAR */}
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => router.back()}
-      >
-        <Text style={styles.backText}>← Volver</Text>
-      </TouchableOpacity>
-
       {/* TICKET */}
       <View
         style={[
@@ -78,8 +72,17 @@ export default function Checkout({ setItems }: Props) {
           isWeb && { width: 400 },
         ]}
       >
+
+        {/* BOTÓN REGRESAR */}
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => router.back()}
+        >
+          <Text style={styles.backText}>← Volver</Text>
+        </TouchableOpacity>
+
         <Text style={styles.title}>
-          🧾 Ticket de Compra
+          📄 Ticket de Compra
         </Text>
 
         {/* LISTA */}
@@ -141,7 +144,7 @@ export default function Checkout({ setItems }: Props) {
         {/* BOTÓN */}
         <TouchableOpacity
           style={styles.button}
-          onPress={finalizarCompra}
+          onPress={() => router.push("/seguimiento")}
         >
           <Text style={styles.buttonText}>
             Confirmar Pedido
@@ -161,18 +164,31 @@ const styles = StyleSheet.create({
   },
 
   backButton: {
-    marginBottom: 15,
-    alignSelf: "flex-start",
-    backgroundColor: "#8B0000",
-    paddingHorizontal: 15,
-    paddingVertical: 8,
-    borderRadius: 10,
-  },
+    position: "absolute",
+    top: 15,
+    left: 20,
+    zIndex: 10,
 
+    backgroundColor: "#ffffff",
+    paddingVertical: 12,
+    paddingHorizontal: 18,
+
+    borderRadius: 14,
+
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 6,
+
+    elevation: 5,
+  },
   backText: {
-    color: "#fff",
-    fontSize: 16,
+    color: "#c0392b",
     fontWeight: "bold",
+    fontSize: 16,
   },
 
   ticket: {
@@ -182,6 +198,7 @@ const styles = StyleSheet.create({
     borderStyle: "dashed",
     borderWidth: 2,
     borderColor: "#ccc",
+    paddingTop: 55,
   },
 
   title: {
@@ -189,6 +206,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 15,
+    marginTop: 40,
   },
 
   empty: {
@@ -243,4 +261,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 16,
   },
+
 });
