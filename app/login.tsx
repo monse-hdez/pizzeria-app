@@ -35,7 +35,7 @@ export default function LoginScreen() {
 
             await signInWithEmailAndPassword(auth, email, password);
 
-            router.replace("/Home");
+            router.replace("/home");
 
         } catch (error: any) {
 

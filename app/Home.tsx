@@ -2,6 +2,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useRef, useState } from 'react';
 import { Animated, Text, TouchableOpacity, View, useWindowDimensions } from "react-native";
 
+import { Image } from "react-native";
 import { bebidas, pizzas } from '../src/data/productos';
 import styles from '../src/styles/homeStyles';
 
@@ -28,6 +29,7 @@ export default function Home() {
   const [cartVisible, setCartVisible] = useState<boolean>(false);
   const [menuVisible, setMenuVisible] = useState<boolean>(false);
 
+
   const slideAnim = useRef(new Animated.Value(300)).current;
   const slideMenu = useRef(new Animated.Value(-300)).current;
   const { addItem, items, clearCart } = useCart();
@@ -48,7 +50,9 @@ export default function Home() {
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
-        <Text style={styles.title}>Pizzería " Bella "</Text>
+        
+        <Text style={styles.title}>Pizzería  "Bella"</Text>
+
 
         <CategoryTabs
           categoria={categoria}
@@ -115,7 +119,7 @@ export default function Home() {
         toggleMenu={() => setMenuVisible(false)}
 
         cerrarSesion={() => {
-          clearCart();       
+          clearCart();
           router.replace("/login");
         }}
       />

@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#1E1E1E',
+        backgroundColor: '#121212',
         paddingTop: 110,
         paddingHorizontal: 20,
         overflow: 'hidden',
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 25,
         borderRadius: 12,
         marginHorizontal: 5,
-        alignSelf: 'center', 
+        alignSelf: 'center',
     },
 
     tabActivo: {
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 25,
         borderRadius: 12,
         marginHorizontal: 5,
-        alignSelf: 'center', 
+        alignSelf: 'center',
     },
 
     tabTexto: {
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
 
     imagen: {
         width: '100%',
-        height: 120, 
+        height: 120,
         borderTopLeftRadius: 15,
         borderTopRightRadius: 15,
     },
@@ -119,6 +119,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        gap: 100,
     },
 
     nombre: {
@@ -231,6 +232,8 @@ const styles = StyleSheet.create({
         fontSize: 12,
         fontWeight: 'bold',
     },
+
+    
 });
 
 export default styles;

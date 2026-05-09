@@ -9,5 +9,5 @@ export const bebidas = [
   { id: 5, nombre: 'Coca-Cola', precio: 50, imagen: require('../../assets/homeImg/cocacola.jpg') },
   { id: 6, nombre: 'Jugo de naranja', precio: 45, imagen: require('../../assets/homeImg/naranja.jpg') },
   { id: 7, nombre: 'Limonada', precio: 40, imagen: require('../../assets/homeImg/limonada.jpg') },
-  { id: 8, nombre: 'Pepsi', precio: 50, imagen: require('../../assets/homeImg/cocacola.jpg') },
+  { id: 8, nombre: 'Pepsi', precio: 50, imagen: require('../../assets/homeImg/pepsi.jpg') },
 ];
