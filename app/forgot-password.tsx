@@ -54,7 +54,7 @@ export default function ForgotPassword() {
                     left: 0,
                     right: 0,
                     bottom: 0,
-                    backgroundColor: "rgba(0,0,0,0.9)", // aquí está la "sombra"
+                    backgroundColor: "rgba(0,0,0,0.8)", // aquí está la "sombra"
                 }}
             />
 

@@ -75,8 +75,12 @@ export default function Home() {
               key={item.id}
               item={item}
               onAdd={(item) => {
-                setSelectedItem(item);
-                setModalVisible(true);
+                if (categoria === "pizzas") {
+                  setSelectedItem(item);
+                  setModalVisible(true);
+                } else {
+                  addToCart(item);
+                }
               }}
               onCustomize={() => router.push("/customize")}
             />
