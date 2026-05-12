@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import {  router, useLocalSearchParams } from "expo-router";
+import { useCart } from "../app/CartContext";
 import {
   Image,
   SafeAreaView,
@@ -12,9 +14,9 @@ import {
 
 export default function ExtraIngredients() {
   const [seleccionados, setSeleccionados] = useState<string[]>([]);
-
-const pizzaName = "Pepperoni";
-const pizzaBasePrice = 250;
+  const { pizzaName, pizzaPrice } = useLocalSearchParams();
+  const basePrice = Number(pizzaPrice);
+  const { addItem } = useCart();
 
   const extras = [
     { nombre: "Queso Extra", precio: 20, img: require("../assets/images/ingredientes/cheese.png") },
@@ -28,10 +30,11 @@ const pizzaBasePrice = 250;
   ];
 
   const totalPrice =
-  pizzaBasePrice +
+  basePrice +
   extras
     .filter((item) => seleccionados.includes(item.nombre))
     .reduce((sum, item) => sum + item.precio, 0);
+
 
   const toggleExtra = (item: string) => {
     if (seleccionados.includes(item)) {
@@ -81,11 +84,49 @@ const pizzaBasePrice = 250;
 
       {/* Botón */}
       <Text style={styles.totalText}>
-        {pizzaName}: ${totalPrice}
-      </Text>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Confirmar Pedido</Text>
-      </TouchableOpacity>
+  {pizzaName}: ${totalPrice}
+</Text>
+<TouchableOpacity
+  style={styles.button}
+  onPress={() => {
+
+    // Ingredientes seleccionados
+    const extrasSeleccionados = extras.filter((item) =>
+      seleccionados.includes(item.nombre)
+    );
+
+    // Texto de extras
+    const extrasTexto = extrasSeleccionados
+      .map((item) => item.nombre)
+      .join(", ");
+
+    // Agregar al carrito
+    addItem({
+      id: Date.now().toString(),
+
+      // Nombre completo
+      name:
+        extrasTexto.length > 0
+          ? `${pizzaName} (${extrasTexto})`
+          : String(pizzaName),
+
+      // Precio final
+      price: totalPrice,
+
+      // Imagen opcional
+      img: require("../assets/images/ingredientes/pizza.png"),
+
+      qty: 1,
+    });
+
+    // Regresar al Home
+    router.back();
+  }}
+>
+  <Text style={styles.buttonText}>
+    Agregar al carrito • ${totalPrice}
+  </Text>
+</TouchableOpacity>
     </SafeAreaView>
   );
 }

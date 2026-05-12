@@ -28,7 +28,7 @@ export default function Home() {
   const [cartVisible, setCartVisible] = useState<boolean>(false);
   const [menuVisible, setMenuVisible] = useState<boolean>(false);
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
+const [selectedItem, setSelectedItem] = useState<Product | null>(null);
 
   const slideAnim = useRef(new Animated.Value(300)).current;
   const slideMenu = useRef(new Animated.Value(-300)).current;
@@ -156,7 +156,13 @@ export default function Home() {
                 style={styles.modalBtnYes}
                 onPress={() => {
                   setModalVisible(false);
-                  router.push("/extraIngredients");
+                  router.push({
+                    pathname: "/extraIngredients",
+                    params: {
+                    pizzaName: selectedItem?.nombre,
+                    pizzaPrice: selectedItem?.precio,
+                  },
+              });
                 }}
               >
                 <Text style={styles.modalBtnText}>Sí</Text>
