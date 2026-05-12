@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Animated, Text, TouchableOpacity, View } from "react-native";
+import { useRouter } from 'expo-router'; // 1. Importamos el router de Expo
 import styles from "../styles/homeStyles";
 
 type Props = {
@@ -7,9 +8,12 @@ type Props = {
     slideMenu: Animated.Value;
     toggleMenu: () => void;
     cerrarSesion: () => void;
+    // Nota: Quité la prop 'contacto' de aquí porque la navegación la haremos directo dentro de este componente.
 };
 
 export default function MenuPanel({ visible, slideMenu, toggleMenu, cerrarSesion }: Props) {
+    
+    const router = useRouter(); // 2. Inicializamos el router
 
     useEffect(() => {
         Animated.timing(slideMenu, {
@@ -44,7 +48,7 @@ export default function MenuPanel({ visible, slideMenu, toggleMenu, cerrarSesion
                 }}
             />
 
-            {/*  MENÚ */}
+            {/* MENÚ */}
             <Animated.View style={[
                 styles.menuPanel,
                 {
@@ -67,7 +71,11 @@ export default function MenuPanel({ visible, slideMenu, toggleMenu, cerrarSesion
                     <Text style={styles.menuItem}>Acerca de</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity>
+                {/* 3. AQUÍ HACEMOS LA MAGIA DE LA REDIRECCIÓN */}
+                <TouchableOpacity onPress={() => {
+                    toggleMenu(); // Primero cerramos el panel
+                    router.push('/contacto'); // Luego navegamos al archivo app/contacto.tsx
+                }}>
                     <Text style={styles.menuItem}>Contacto</Text>
                 </TouchableOpacity>
 
