@@ -27,6 +27,8 @@ export default function Home() {
   const [categoria, setCategoria] = useState<string>('pizzas');
   const [cartVisible, setCartVisible] = useState<boolean>(false);
   const [menuVisible, setMenuVisible] = useState<boolean>(false);
+  const [modalVisible, setModalVisible] = useState(false);
+const [selectedItem, setSelectedItem] = useState<Product | null>(null);
 
   const slideAnim = useRef(new Animated.Value(300)).current;
   const slideMenu = useRef(new Animated.Value(-300)).current;
@@ -48,7 +50,9 @@ export default function Home() {
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
-        <Text style={styles.title}>Pizzería " Bella "</Text>
+
+        <Text style={styles.title}>Pizzería  "Bella"</Text>
+
 
         <CategoryTabs
           categoria={categoria}
@@ -70,7 +74,14 @@ export default function Home() {
             <ProductCard
               key={item.id}
               item={item}
-              onAdd={addToCart}
+              onAdd={(item) => {
+                if (categoria === "pizzas") {
+                  setSelectedItem(item);
+                  setModalVisible(true);
+                } else {
+                  addToCart(item);
+                }
+              }}
               onCustomize={() => router.push("/customize")}
             />
           ))}
@@ -115,10 +126,52 @@ export default function Home() {
         toggleMenu={() => setMenuVisible(false)}
 
         cerrarSesion={() => {
-          clearCart();       
+          clearCart();
           router.replace("/login");
         }}
       />
+      {/* 🔥 MODAL */}
+      {modalVisible && (
+        <View style={styles.modalOverlay}>
+          <View style={styles.modal}>
+            <Text style={styles.modalText}>
+              ¿Desea agregar ingredientes extra?
+            </Text>
+
+            <View style={styles.modalButtons}>
+
+              {/* ❌ NO */}
+              <TouchableOpacity
+                style={styles.modalBtnNo}
+                onPress={() => {
+                  if (selectedItem) addToCart(selectedItem);
+                  setModalVisible(false);
+                }}
+              >
+                <Text style={styles.modalBtnText}>No</Text>
+              </TouchableOpacity>
+
+              {/* ✅ SÍ */}
+              <TouchableOpacity
+                style={styles.modalBtnYes}
+                onPress={() => {
+                  setModalVisible(false);
+                  router.push({
+                    pathname: "/extraIngredients",
+                    params: {
+                    pizzaName: selectedItem?.nombre,
+                    pizzaPrice: selectedItem?.precio,
+                  },
+              });
+                }}
+              >
+                <Text style={styles.modalBtnText}>Sí</Text>
+              </TouchableOpacity>
+
+            </View>
+          </View>
+        </View>
+      )}
     </View >
   );
 }

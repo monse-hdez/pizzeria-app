@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
-import { Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Alert, ImageBackground, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../firebaseConfig";
@@ -37,15 +37,26 @@ export default function ForgotPassword() {
     };
 
     return (
-        <View
+        <ImageBackground
+            source={require("../assets/passwordImg/pizza-fondo.jpg")}
             style={{
                 flex: 1,
                 justifyContent: "center",
                 alignItems: "center",
                 padding: 20,
-                backgroundColor: "#f3c575bd",
             }}
+            resizeMode="cover"
         >
+            <View
+                style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    backgroundColor: "rgba(0,0,0,0.8)", // aquí está la "sombra"
+                }}
+            />
 
             {/* BOTÓN REGRESAR */}
             <TouchableOpacity
@@ -59,7 +70,7 @@ export default function ForgotPassword() {
                 <Text
                     style={{
                         fontSize: 16,
-                        color: "#141313",
+                        color: "#fffcfc",
                         fontWeight: "bold",
                     }}
                 >
@@ -84,6 +95,7 @@ export default function ForgotPassword() {
                         marginBottom: 15,
                         textAlign: "center",
                         fontWeight: "bold",
+
                     }}
                 >
                     Recuperar contraseña
@@ -119,6 +131,6 @@ export default function ForgotPassword() {
                     </Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </ImageBackground>
     );
 }

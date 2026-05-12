@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import {  router, useLocalSearchParams } from "expo-router";
+import { useCart } from "../app/CartContext";
 import {
   Image,
   SafeAreaView,
@@ -8,17 +10,31 @@ import {
   View,
 } from "react-native";
 
+
+
 export default function ExtraIngredients() {
   const [seleccionados, setSeleccionados] = useState<string[]>([]);
+  const { pizzaName, pizzaPrice } = useLocalSearchParams();
+  const basePrice = Number(pizzaPrice);
+  const { addItem } = useCart();
 
   const extras = [
-    { nombre: "Queso Extra", img: require("../assets/images/ingredientes/cheese.png") },
-    { nombre: "Pepperoni Extra", img: require("../assets/images/ingredientes/pepperoni.png") },
-    { nombre: "Champiñones", img: require("../assets/images/ingredientes/champinion.png") },
-    { nombre: "Jalapeños", img: require("../assets/images/ingredientes/chilli.png") },
-    { nombre: "Cebolla", img: require("../assets/images/ingredientes/cebolla.png") },
-    { nombre: "Tocino", img: require("../assets/images/ingredientes/tocino.png") },
+    { nombre: "Queso Extra", precio: 20, img: require("../assets/images/ingredientes/cheese.png") },
+    { nombre: "Pepperoni Extra", precio: 30, img: require("../assets/images/ingredientes/pepperoni.png") },
+    { nombre: "Champiñones Extra", precio: 15, img: require("../assets/images/ingredientes/champinion.png") },
+    { nombre: "Jalapeños Extra", precio: 10, img: require("../assets/images/ingredientes/chilli.png") },
+    { nombre: "Cebolla Extra", precio: 10, img: require("../assets/images/ingredientes/cebolla.png") },
+    { nombre: "Tocino Extra", precio: 35, img: require("../assets/images/ingredientes/tocino.png") },
+    { nombre: "Piña Extra", precio: 20, img: require("../assets/images/ingredientes/pina.png")},
+    { nombre: "Salchicha Extra", precio: 25, img: require("../assets/images/ingredientes/salchicha.png")},
   ];
+
+  const totalPrice =
+  basePrice +
+  extras
+    .filter((item) => seleccionados.includes(item.nombre))
+    .reduce((sum, item) => sum + item.precio, 0);
+
 
   const toggleExtra = (item: string) => {
     if (seleccionados.includes(item)) {
@@ -67,9 +83,50 @@ export default function ExtraIngredients() {
       </View>
 
       {/* Botón */}
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Confirmar Pedido</Text>
-      </TouchableOpacity>
+      <Text style={styles.totalText}>
+  {pizzaName}: ${totalPrice}
+</Text>
+<TouchableOpacity
+  style={styles.button}
+  onPress={() => {
+
+    // Ingredientes seleccionados
+    const extrasSeleccionados = extras.filter((item) =>
+      seleccionados.includes(item.nombre)
+    );
+
+    // Texto de extras
+    const extrasTexto = extrasSeleccionados
+      .map((item) => item.nombre)
+      .join(", ");
+
+    // Agregar al carrito
+    addItem({
+      id: Date.now().toString(),
+
+      // Nombre completo
+      name:
+        extrasTexto.length > 0
+          ? `${pizzaName} (${extrasTexto})`
+          : String(pizzaName),
+
+      // Precio final
+      price: totalPrice,
+
+      // Imagen opcional
+      img: require("../assets/images/ingredientes/pizza.png"),
+
+      qty: 1,
+    });
+
+    // Regresar al Home
+    router.back();
+  }}
+>
+  <Text style={styles.buttonText}>
+    Agregar al carrito • ${totalPrice}
+  </Text>
+</TouchableOpacity>
     </SafeAreaView>
   );
 }
@@ -154,5 +211,13 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     fontWeight: "bold",
+  },
+
+  totalText : {
+    fontSize: 22,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginVertical: 15,
+    color: "#fff",
   },
 });
