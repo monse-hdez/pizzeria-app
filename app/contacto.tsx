@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useRouter } from 'expo-router';
 import {
     FlatList, Image,
     LayoutAnimation,
@@ -29,6 +30,7 @@ interface Client {
 }
 
 export default function App() {
+  const router = useRouter();
   // 2. Asignamos la interfaz Client al estado
   const [clients, setClients] = useState<Client[]>([
     { id: '1', name: 'Juan Bautista', phone: '80 4412 601', avatar: '11' },
@@ -116,7 +118,10 @@ export default function App() {
         
         {/* Encabezado */}
         <View style={styles.header}>
-          <TouchableOpacity><Text style={styles.backBtn}>❮</Text></TouchableOpacity>
+          {/* 3. Agrega el evento onPress al botón */}
+          <TouchableOpacity onPress={() => router.back()}>
+            <Text style={styles.backBtn}>❮</Text>
+          </TouchableOpacity>
           <Text style={styles.headerTitle}>Gestión de Clientes</Text>
           <TouchableOpacity onPress={openAddModal}>
             <Text style={styles.addBtn}>+</Text>
