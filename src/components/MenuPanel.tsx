@@ -67,13 +67,11 @@ export default function MenuPanel({ visible, slideMenu, toggleMenu, cerrarSesion
 
                 <Text style={styles.menuTitle}>Menú</Text>
 
-                <TouchableOpacity
-                    onPress={() => {
-                    toggleMenu();
-                    router.push("/Acerca_de");
-                 }}
->
-                 <Text style={styles.menuItem}>Acerca de</Text>
+                <TouchableOpacity onPress={() => {
+                    toggleMenu(); // Primero cerramos el panel
+                    router.push('/'); // Luego navegamos al archivo app/contacto.tsx
+                }}>
+                    <Text style={styles.menuItem}>Acerca de</Text>
                 </TouchableOpacity>
 
                 {/* 3. AQUÍ HACEMOS LA MAGIA DE LA REDIRECCIÓN */}
