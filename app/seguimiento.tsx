@@ -15,10 +15,13 @@ import {
   doc,
   getDoc
 } from "firebase/firestore";
+import { useCart }
+from "./CartContext";
 
 export default function Seguimiento() {
 
   const router = useRouter();
+  const { clearCart } = useCart();
 
   const [estado, setEstado] =
     useState("Pedido recibido 🍕");
@@ -156,7 +159,10 @@ obtenerUsuario();
         {/* BOTÓN */}
         <TouchableOpacity
           style={styles.homeButton}
-          onPress={() => router.push("/Home")}
+          onPress={() => {
+        clearCart();
+        router.replace("/Home");
+        }}
         >
 
           <Text style={styles.homeButtonText}>
