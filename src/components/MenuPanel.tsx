@@ -70,7 +70,7 @@ export default function MenuPanel({ visible, slideMenu, toggleMenu, cerrarSesion
                 <TouchableOpacity
                     onPress={() => {
                     toggleMenu();
-                    router.push("/Acerca_de");
+                    router.push("/acerca_de" as any);
                  }}
 >
                  <Text style={styles.menuItem}>Acerca de</Text>
