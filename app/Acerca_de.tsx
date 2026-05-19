@@ -8,7 +8,7 @@ import {
   View,
 } from "react-native";
 
-export default function Acerca_De() {
+export default function acerca_de() {
   const router = useRouter();
 
   return (
